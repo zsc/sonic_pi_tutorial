@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 13 章：人声录制与处理链——从“录到一条干声”到“能进配乐”</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：Sonic Pi 快速上手——从 8 小节开始</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：从五线谱到代码——音高、时值与读谱映射</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：时间、同步与 Live Coding 思维</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：效果器链与混音入门——让作品“站起来”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：华语古风与戏腔专题——“腔、韵、留白、材质”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：结构与叙事——把段落写成“情绪弧线”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：人声录制与处理链——从“录到一条干声”到“能进配乐”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter14.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 14 章：与 DAW / 插件 / 外设联动——把 Sonic Pi 放进你的制作流水线</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter15.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 15 章：实战项目 A——90 秒《古风/戏腔 × 弦乐氛围 × 轻电子》完整制作</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter16.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 16 章：实战项目 B——2 分钟 Hans Zimmer 式“推进与压迫感”配乐</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter17.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 17 章：代码片段速查——可直接复制的“写作积木” (Cheat Sheet)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter18.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 18 章：练习题与小作业——从“代码逻辑”到“音乐直觉”的综合演练</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter19.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 19 章：故障排除与性能优化——当声音不听话时</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="13">第 13 章：人声录制与处理链——从“录到一条干声”到“能进配乐”</h1>
+<h2 id="1">1. 开篇：代码世界中的“肉嗓”</h2>
+<p>Sonic Pi 是一个由正弦波、方波和数学逻辑构建的纯净世界。在这个世界里，一切都是完美的：节奏精确到毫秒，音准不存在偏差。</p>
+<p>然而，当我们试图创作<strong>华语古风（Gu Feng）</strong>或<strong>电影配乐（Cinematic）</strong>时，这种“完美”往往是致命的。</p>
+<ul>
+<li>古风的灵魂在于“韵”：那些并不在钢琴键上的滑音、气口和微颤。</li>
+<li>Hans Zimmer 式史诗感的来源往往是“不完美的人性叠加”：几十个人声轨道的微小偏差汇聚成的巨大声墙。</li>
+</ul>
+<p>本章将暂时把视线从代移开，聚焦于<strong>音频工程（Audio Engineering）</strong>。因为在 Sonic Pi 中写出 <code>sample :my_voice</code> 是一回事，但让这个 <code>:my_voice</code> 听起来像专业的戏腔名伶或好莱坞大片，则是另一回事。</p>
+<p><strong>本章目标：</strong></p>
+<ol>
+<li><strong>录音</strong>：在非专业环境下（如卧室）获得可用的干声。</li>
+<li><strong>修音与整形</strong>：理解“音高（Pitch）”与“共振峰（Formant）”的分离，掌握戏腔的“曲线修音法”。</li>
+<li><strong>制造厚度</strong>：通过多层录制（Double Tracking）模拟 Zimmer 式合唱。</li>
+<li><strong>空间与融合</strong>：三种风格（古风/久石让/Zimmer）的混响与延迟策略。</li>
+</ol>
+<hr />
+<h2 id="2">2. 录音阶段：决定素材生死的物理法则</h2>
+<h3 id="21">2.1 卧室制作人的声学自救</h3>
+<p>大多数 Sonic Pi 用户没有专业的吸音棚。在卧室录音，最大的敌人是<strong>房间混响（Room Tone）</strong>和<strong>环境底噪</strong>。</p>
+<p><strong>Rule of Thumb（卧室录音法则）：</strong></p>
+<ul>
+<li><strong>衣柜录音法（Closet Hack）</strong>：打开装满衣服的衣柜门，背对衣，把麦克风对着衣柜内部唱。衣服是极佳的吸音材料，能吸收掉反射声，让你得到一条非常“干”的声音。</li>
+<li><strong>指向性选择</strong>：务必使用<strong>心形指向（Cardioid）</strong>麦克风，并确保麦克风背面（盲区）对着电脑风扇或窗户。</li>
+</ul>
+<h3 id="22-gain-staging-12db">2.2 增益架构（Gain Staging）：为什么是 -12dB？</h3>
+<p>在模拟时代（磁带），我们希望录得大声以压过底噪。但在 24-bit 数字录音时代，<strong>不要追求波形“顶满”</strong>。</p>
+<ul>
+<li><strong>-18dBFS 到 -12dBFS</strong>：这是黄金区域（Sweet Spot）。<ul>
+<li>这个音量能保证你的信噪比足够好。</li>
+<li>这个音量给后续的效果器（EQ、压缩、混响）留出了足够的<strong>动态余量（Headroom）</strong>。</li>
+</ul>
+</li>
+<li><strong>红线警告</strong>：一旦数字波形触顶（0dBFS），波形会被直接削平（Clipping）。这种失真是<strong>不可逆的</strong>，听起来像刺耳的撕裂声，后期无法修复。</li>
+</ul>
+<hr />
+<h2 id="3">3. 编辑与修音：保留“人性”的艺术</h2>
+<h3 id="31">3.1 呼吸与气口的理</h3>
+<p>在流行音乐工业中，呼吸声常被视为噪音切除。但在古风和配乐中，呼吸是<strong>乐器</strong>。</p>
+<ul>
+<li><strong>古风/戏腔</strong>：保留句首的吸气声，这叫“偷气”。如果切掉，听众会觉得歌手快憋死了，情感会断层。<ul>
+<li><em>处理手法</em>：不要切除，而是画一个 Volume Automation（音量包络），将呼吸声压低 6dB。</li>
+</ul>
+</li>
+<li><strong>Zimmer 式合唱</strong>：由于是多人叠加，几十个呼吸声叠在一起会变成白噪音。必须切除或用 <strong>Noise Gate（噪声门）</strong> 极快地关断。</li>
+</ul>
+<h3 id="32-vs">3.2 戏腔修音专项：曲线 vs 阶梯</h3>
+<p>这是本章最硬核的部分。市面上的修音软件（Melodyne, Auto-Tune, VariAudio）默认逻辑是把波形拉直。这对戏腔是毁灭性的。</p>
+<p><strong>戏腔的音准特征：</strong></p>
+<ol>
+<li><strong>滑音起式</strong>：音符往往不是直接击中音高，而是从低三度或五度滑上去。</li>
+<li><strong>回转收式</strong>：尾音往往会上扬或下行，形成“余韵”。</li>
+<li><strong>中间微颤</strong>：长音部分会有高频的颤音（Vibrato）。</li>
+</ol>
+<p><strong>ASCII 图解：修音逻辑对比</strong></p>
+<div class="codehilite"><pre><span></span><code>[原始戏腔波形]
+       /~~~~~\
+      /       \
+   __/         \__  (充满曲线和动态)
+
+[错误操作：全选 -&gt; 100% 量化]
+      _______
+   __|       |__    (变成了 T-Pain 机器人，韵味全无)
+
+[正确操作：手动分段处理]
+   保留   修准   保留
+   /   [~~~~~]   \
+  /   (仅微调)    \
+_/    (中心轴)     \_
+</code></pre></div>
+
+<p><strong>操作指南</strong>：</p>
+<ul>
+<li><strong>剪刀手</strong>：在 DAW 中，把音符的“滑音头”、“稳定腹”、“滑音尾”切开。</li>
+<li><strong>只修肚子</strong>：只对中间的“稳定腹”进行音高中心校准。</li>
+<li><strong>描画曲线</strong>：如果软件支持（如 Melodyne），手动减小颤音幅度（Modulation），但绝不要拉直。</li>
+</ul>
+<hr />
+<h2 id="4-formant">4. 音色设计：共振峰（Formant）的魔术</h2>
+<p>在 Sonic Pi 中，<code>pitch</code> 参数通常会同时改变音高和播放速度（像快放磁带）。但这并不是我们想要的“变声”。我们需要的是<strong>Formant Shifting</strong>。</p>
+<h3 id="41">4.1 什么是共振？</h3>
+<ul>
+<li><strong>Pitch (基频)</strong>：声带震动的快慢。决定了音高。</li>
+<li><strong>Formant (共振峰)</strong>：喉咙、口腔、鼻腔的<strong>物理尺寸</strong>对声音的滤波作用。决定了音色。<ul>
+<li>小管子（小孩/女性）= 共振峰高。</li>
+<li>大管子（巨人/怪兽）= 共振峰低。</li>
+</ul>
+</li>
+</ul>
+<h3 id="42">4.2 常见应用场景与参数</h3>
+<p>你需要在 DAW 中使用支持 Formant Shift 的插件（如 Little AlterBoy, Melodyne, Vocal Transformer）处理采样，然后导入 Sonic Pi。</p>
+<p>| 目标风格 | Formant 调整值 | Pitch 调整值 | 听感描述 | 适用场景 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">目标风格</th>
+<th style="text-align: left;">Formant 调整值</th>
+<th style="text-align: left;">Pitch 调整值</th>
+<th style="text-align: left;">听感描述</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>伪·旦角</strong></td>
+<td style="text-align: left;">+2 ~ +4 semi</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">尖细、头腔共鸣强、年轻化</td>
+<td style="text-align: left;">男声唱戏腔，或女声模仿童声</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>妖/魔</strong></td>
+<td style="text-align: left;">-12 semi (降低)</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">极度深沉、胸腔共鸣、非人感</td>
+<td style="text-align: left;">仙侠剧中的反派、Boss 战背景音</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>精灵/仙气</strong></td>
+<td style="text-align: left;">+1 semi</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">稍微提亮，增加空气感</td>
+<td style="text-align: left;">古风背景吟唱（Pad 类人声）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Zimmer 怪物</strong></td>
+<td style="text-align: left;">-5 semi</td>
+<td style="text-align: left;">-12 semi</td>
+<td style="text-align: left;">巨大、迟、压迫感</td>
+<td style="text-align: left;">史诗预告片的 Drop 段落</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5. 制造厚度：人声叠加与声码器</h2>
+<h3 id="51-doublequad-tracking">5.1 双轨与四轨录音（Double/Quad Tracking）</h3>
+<p>Zimmer 的配乐之所以“大”，不是因为音量大，而是因为“宽”。
+如果你想让一段副歌（Chorus）听起来有力量，<strong>永远不要只复制粘贴轨道</strong>。</p>
+<p><strong>操作流程：</strong></p>
+<ol>
+<li><strong>录 Main</strong>：录一遍主旋律，放中间（Pan Center）。</li>
+<li><strong>录 Double L</strong>：<strong>重新唱一遍</strong>同样的旋律，放极左（Pan 100% Left）。</li>
+<li><strong>录 Double R</strong>：<strong>再重新唱一遍</strong>同样的旋律，放极右（Pan 100% Right）。</li>
+<li><strong>效果</strong>：由于三次演唱微小的音准和时间误差，左右声道会产生极宽的立体声场，声音瞬间变厚 3 倍。</li>
+</ol>
+<h3 id="52-the-fake-choir">5.2 假合唱团（The Fake Choir）</h3>
+<p>只有你一个人，怎么做出 50 人的效果？</p>
+<ol>
+<li>录制 4 轨原调。</li>
+<li>录制 4 轨高八度（假声）。</li>
+<li>录制 4 轨低八度。</li>
+<li><strong>关键步骤</strong>：对每一轨使用不同的 Formant Shift 调（有的 +0.5，有的 -0.5），模拟不同人的喉咙构造。</li>
+<li>将高频部分用 Low Pass Filter 切掉一点（模拟远距离听感），送入大混响。</li>
+</ol>
+<h3 id="53-vocoder">5.3 声码器（Vocoder）思路</h3>
+<p>在 Sonic Pi 这种电子环境中，将人声“合成器化”是很好的融合手段。</p>
+<ul>
+<li><strong>原理</strong>：用人声的<strong>频谱包络</strong>去“雕刻”合成器（如 Saw Wave）的声音。</li>
+<li><strong>Sonic Pi 实现思路</strong>：通常不在 Sonic Pi 内实时做（CPU 消耗大），建议在 DAW 中用 Vocoder 插件做好，导出为 Wav，再在 Sonic Pi 中作为 <code>sample</code> 触发，配合 <code>:slicer</code> 效果器切片，能做出极具节奏感的电子戏腔。</li>
+</ul>
+<hr />
+<h2 id="6">6. 混音与空间：三种流派的具体的参数</h2>
+<p>人声处理完后，需要放入 Sonic Pi 的代码织体中。这时，Reverb 和 EQ 是胶水。</p>
+<h3 id="61">6.1 久石让式（清晰、亲密、叙事）</h3>
+<p>目标：像是在音乐厅的第一排，歌手就在指挥旁边。</p>
+<ul>
+<li><strong>EQ</strong>：略微提升 3kHz-5kHz（增加空气感），切除 150Hz 以下。</li>
+<li><strong>Reverb</strong>：<ul>
+<li>Type: Plate 或 Chamber</li>
+<li>Time (Decay): 1.2s - 1.8s</li>
+<li><strong>Pre-delay</strong>: <strong>20ms - 40ms</strong>（关键！让干声先出来，混响晚一点出来，保证字字清晰）。</li>
+<li>Mix: 15% - 20%</li>
+</ul>
+</li>
+</ul>
+<h3 id="62">6.2 古风/仙侠式（遥远、唯美、写意）</h3>
+<p>目标：山谷、云端、甚至非物理空间。</p>
+<ul>
+<li><strong>EQ</strong>：激进的 High Pass（切掉 200Hz-300Hz），只留中高频，防止浑浊。</li>
+<li><strong>Reverb</strong>：<ul>
+<li>Type: Hall 或 Church</li>
+<li>Time: 3.0s - 6.0s</li>
+<li>Pre-delay: 0ms - 10ms（让人声直接融化在空间里）。</li>
+<li><strong>Damping (高频衰减)</strong>：较强。让尾音暗淡下去，不要刺耳。</li>
+</ul>
+</li>
+<li><strong>Delay</strong>：必须加。使用 Ping-Pong Delay，1/4 或 1/8 附点音符，Feedback 30%，作为人声的影子。</li>
+</ul>
+<h3 id="63-hans-zimmer">6.3 Hans Zimmer 式（乐器化、巨大、压迫）</h3>
+<p>目标：人声不是为了听清歌词，而是作为一种“人肉合成器”。</p>
+<ul>
+<li><strong>EQ</strong>：提升中低频（200Hz-500Hz）的厚度，甚至保留 100Hz 的胸腔感。</li>
+<li><strong>Reverb</strong>：<ul>
+<li>Type: Cathedral (大教堂) 或 Massive Hall</li>
+<li>Time: 4s+</li>
+<li><strong>Width (宽度)</strong>：200%（超宽立体声）。</li>
+</ul>
+</li>
+<li><strong>技巧</strong>：人声的音量往往比你想象的要小，它被“埋”在管弦乐中，只在大动态时透出来。</li>
+</ul>
+<hr />
+<h2 id="7">7. 避让与融合：频谱上的交通指挥</h2>
+<p>在 Sonic Pi 中，如果你的代码写了复杂的 <code>:saw</code> 琶音，人声放进去通常会打架。</p>
+<h3 id="71-eq-the-pocket">7.1 静态 EQ 避让 (The Pocket)</h3>
+<ul>
+<li>人声的核心频率是 <strong>1kHz - 3kHz</strong>（清晰度）和 <strong>200Hz - 400Hz</strong>（温暖度）。</li>
+<li><strong>操作</strong>：在你的 Sonic Pi 配乐轨道（或导出的伴奏）上，使用 EQ 在这两个频段挖一个 <strong>-3dB 到 -5dB</strong> 的坑。</li>
+<li>这叫“给主唱留个座位”。</li>
+</ul>
+<h3 id="72">7.2 动态编曲避让</h3>
+<p>这是一个作曲层面的 Rule of Thumb：</p>
+<ul>
+<li><strong>人声动，伴奏静</strong>：人声在唱复杂的戏腔转音时，伴奏（Sonic Pi）最好是长音 Pad 或简单的分解和弦。</li>
+<li><strong>人声停，伴奏动</strong>：人声的气或长音结尾时，Sonic Pi 的旋律线（Fill-in）或琶音再冲出来填补空白。</li>
+<li><strong>永远不要</strong>让合成器的主旋律和人声唱同一个音区的复杂旋律，除非你想做齐唱。</li>
+</ul>
+<hr />
+<h2 id="8">8. 本章小结</h2>
+<ol>
+<li><strong>物理优先</strong>：最好的混音是无需混音的录音。衣柜是卧室制作人的好朋友。</li>
+<li><strong>戏腔修音</strong>：是“修整”不是“矫正”。保护滑音曲线和颤音，就像保护文物一样。</li>
+<li><strong>Formant 分离</strong>：想要古风“旦角”感或 Zimmer“怪兽”感，调共振峰比调音高更重要。</li>
+<li><strong>叠加法则</strong>：单轨是单薄的，多轨（Double Tracking）是宽广的。</li>
+<li><strong>空间策略</strong>：久石让求“近”，古风求“远”，Zimmer 求“融”。</li>
+</ol>
+<hr />
+<h2 id="9">9. 练习题</h2>
+<h3 id="50">基础题 (50%)</h3>
+<p><strong>练习 13.1：干声质量自检</strong>
+录制一段 10 秒的安静环境音（Room Tone）。</p>
+<ul>
+<li><strong>任务</strong>：在 Sonic Pi 或 DAW 中将这段“静音”放大 20dB。</li>
+<li><strong>观察</strong>：你听到了什么？是均匀的“沙”声（底噪），还是周期性的“嗡嗡”声（电流/冰箱），还是不规则的汽车声？</li>
+<li><strong>思考</strong>：哪种噪音可以用 High Pass Filter 去除？哪种必须重录？</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ul>
+<li><strong>低频嗡嗡声/汽车声</strong>：大部分可以通过 High Pass Filter (切除 80Hz-100Hz) 去除，不影响人声。</li>
+<li><strong>全频段底噪/人声对话</strong>：必须重录。如果在后期去噪，会严重破坏人声高频，产生“水底音”失真。</li>
+</ul>
+</details>
+<p><strong>练习 13.2：共振峰听感辨析</strong>
+找一段男声录音。</p>
+<ul>
+<li><strong>任务 A</strong>：Pitch +0, Formant +4 半音。</li>
+<li><strong>任务 B</strong>：Pitch +4 半音, Formant +4 半音（传统变速）。</li>
+<li><strong>问题</strong>：描述两者的区别。哪一个听起来像“某种乐器”或“旦角”，哪一个听起来像“卡通人物”？</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ul>
+<li><strong>A (Formant Shift)</strong>：听起来像原来的男歌手变成了一个音色很亮、头腔很窄的人（甚至像女性），但高没变。这更接近“旦角”或“伪声”技巧。</li>
+<li><strong>B (Traditional Pitch Shift)</strong>：听起来像“花栗鼠”或卡通人物。因为所有频率（包括基频和泛音）都被均匀拉伸了，这是典型的“磁带快放”效果。</li>
+</ul>
+</details>
+<p><strong>练习 13.3：久石让式预延时 (Pre-delay)</strong>
+在 DAW 或 Sonic Pi 中加载一个 Reverb。</p>
+<ul>
+<li><strong>任务</strong>：设置混响时间 2秒。分别设置 Pre-delay 为 0ms 和 50ms。</li>
+<li><strong>问题</strong>：当人声唱出歌词时，哪种设置能让你听清咬字？为什么？</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ul>
+<li><strong>50ms Pre-delay</strong> 能听得更清。</li>
+<li><strong>原因</strong>：Pre-delay 制造了直达声（干声）和反射声（湿声）之间的时间差。这 50ms 的空隙让听众的大脑先捕获了清晰的辅音（咬字），随后才听到混响的包围感。0ms 会让混响瞬间冲刷掉咬字细节。</li>
+</ul>
+</details>
+<h3 id="50_1">挑战题 (50%)</h3>
+<p><strong>练习 13.4：古风戏腔的“自动化”修整</strong>
+假设你有一句戏腔：“啊~~~”（从 Re 滑到 Sol，颤音，滑回 Do）。</p>
+<ul>
+<li><strong>任务</strong>：如果你必须使用 Auto-Tune 类的自动插件，你应该如何设置 <code>Retune Speed</code> (校准速度) 和 <code>Humanize</code> (人性化) 参数？</li>
+<li><strong>提示</strong>：极快的 Speed 会产生电音效果。</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ul>
+<li><strong>Retune Speed</strong>: 设置得<strong>很慢</strong>（如 40ms - 80ms，甚至更慢）。这样插件会忽略快速的滑音和颤音，只在音符极其稳定时才介入校准。</li>
+<li><strong>Humanize</strong>: 设置得<strong>较高</strong>。</li>
+<li><strong>最佳策略</strong>：如果只能用自动插件，使用 <strong>Automation (自动化控制)</strong>。在滑音发生时，将 Retune Speed 自动化到“0”（即关闭效果），在稳定长音时再打开。</li>
+</ul>
+</details>
+<p><strong>练习 13.5：双轨叠加的“伪随机”实验</strong>
+在 Sonic Pi 中，加载同一个 <code>sample :vocal_a</code> 两次。</p>
+<ul>
+<li><strong>代码尝试</strong>：<ol>
+<li>同时触发，Pan 设为 -1 和 1。</li>
+<li>同时触发，但其中一个 <code>rate: 1.001</code> (快千分之一)，Pan 设为 -1 和 1。</li>
+</ol>
+</li>
+<li><strong>问题</strong>：情况 1 和情况 2 听起来有什么区别？这就解释了为什么不能简单复制轨道。</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ul>
+<li><strong>情况 1</strong>：听起来还是单声道（Mono），只是变响了。因为左右耳信号完全一致，大脑会将其定位在正中间。</li>
+<li><strong>情况 2</strong>：听起来非常宽。微小的速度差异导致了<strong>相位差</strong>（Phasing），声音会在声场中游离，产生一种人工的立体声厚度。这就是 Double Tracking 的原理模拟。</li>
+</ul>
+</details>
+<p><strong>练习 13.6：频谱“让位”实战</strong>
+你的 Sonic Pi 代码正在演奏一段厚重的低音大提琴（Cello）和中频丰富的钢琴，此时人声进场。</p>
+<ul>
+<li><strong>任务</strong>：写出一段伪代码或处理逻辑，描述如何通过 EQ 和 Sidechain（侧链）让人声浮现出来。</li>
+</ul>
+<details>
+<summary>参考答案</summary>
+<ol>
+<li><strong>EQ 静态处理</strong>：切除钢琴和 Cello 在 2.5kHz 附近的频率（-3dB，Q=1.0），这是人声“亮度”的所在。</li>
+<li><strong>Sidechain (侧链压缩)</strong>：在 Sonic Pi 中，可以使用 <code>:compressor</code> 包裹乐器轨道。<ul>
+<li>将人声作为 trigger。</li>
+<li>每当人声触发时，乐器的音量瞬间衰减 -2dB 到 -4dB。</li>
+<li>Release time 要快（&lt;100ms），让人声一停乐器马上恢复，形成“呼吸感”。</li>
+</ul>
+</li>
+</ol>
+</details>
+<hr />
+<h2 id="10-gotchas">10. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="101-plosives">10.1 爆破音（Plosives）灾难</h3>
+<ul>
+<li><strong>现象</strong>：每次唱“不”、“跑”、“破”字时，耳机里都有“嘭”的一声低频巨响。</li>
+<li><strong>原因</strong>：嘴巴喷出的气流直接冲击了麦克风振膜。</li>
+<li><strong>修复</strong>：后期很难修（只能切掉低频，但会损音质）。</li>
+<li><strong>预防</strong>：<ol>
+<li><strong>必须</strong>买一个防喷罩（Pop Filter）。</li>
+<li><strong>土法</strong>：将一支铅笔垂直绑在麦克风正前方，可以把气流切开。</li>
+<li><strong>角度</strong>：对着麦克风的边缘唱，不要正对中心。</li>
+</ol>
+</li>
+</ul>
+<h3 id="102-sibilance">10.2 齿音（Sibilance）越修越刺耳</h3>
+<ul>
+<li><strong>现象</strong>：为了让古风人声“甜美”，你疯狂提升频（High Shelf）。结果“三生三世”唱出来全是刺耳的哨音。</li>
+<li><strong>原理</strong>：你提升了 10kHz 的空气感，同时也提升了 5kHz-8kHz 的齿音区。</li>
+<li><strong>解决</strong>：<ol>
+<li>先用 <strong>De-esser</strong>（齿音消除器）压掉齿音。</li>
+<li><strong>再</strong>提升高频 EQ。顺序不能反。</li>
+</ol>
+</li>
+</ul>
+<h3 id="103-muddy-reverb">10.3 混响太脏（Muddy Reverb）</h3>
+<ul>
+<li><strong>现象</strong>：加了 Hall Reverb 后，整个混音变得浑浊不堪，像在澡堂子里。</li>
+<li><strong>原因</strong>：人声的低频（200Hz 以下）也被混响反射了，这些低频残响会立刻填满声音空间。</li>
+<li><strong>解决</strong>：<strong>Abbey Road Reverb Trick</strong>。在混响效果器之前（或内部）加一个 EQ，切掉混响信号 500Hz 以下的所有频率。我们要的是高频的空灵，不要低频的轰鸣。</li>
+</ul>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter12.html" class="nav-link prev">← 第 12 章：结构与叙事——把段落写成“情绪弧线”</a><a href="chapter14.html" class="nav-link next">第 14 章：与 DAW / 插件 / 外设联动——把 Sonic Pi 放进你的制作流水线 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>
