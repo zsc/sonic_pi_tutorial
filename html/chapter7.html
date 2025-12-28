@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：Sonic Pi 快速上手——从 8 小节开始</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：从五线谱到代码——音高、时值与读谱映射</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：时间、同步与 Live Coding 思维</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：效果器链与混音入门——让作品“站起来”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：华语古风与戏腔专题——“腔、韵、留白、材质”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：结构与叙事——把段落写成“情绪弧线”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="7-sonic-pi">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</h1>
+<h2 id="1">1. 开篇：告别“红白机”音色</h2>
+<p>为什么别人写的 Sonic Pi 代码听起来像电影配乐，而你的代码听起来像 80 年代的 8-bit 游戏机？</p>
+<p>根本原因不在于和弦有多高级，而在于<strong>声音的物理质感</strong>。
+在声学物理中，一个迷人的声音通常包含以下特征：</p>
+<ol>
+<li><strong>复杂的谐波</strong>：不是单一的蜂鸣，而是像木头、金属或琴弦一样的复合振动。</li>
+<li><strong>动态的演变</strong>：音量和亮度随时间在“呼吸”，而不是死板的开关。</li>
+<li><strong>瑕疵与随机</strong>：真实乐器总有微妙音高偏移和噪音，这恰恰是“人味”的来源。</li>
+</ol>
+<p>本章不讲复杂的信号处理数学公式，而是提供一套<strong>基于直觉的调音法则</strong>。我们将学习如何通过 <code>use_synth</code> 选择材质，通过 <code>ADSR</code> 雕刻形状，通过 <code>cutoff</code> 和 <code>res</code> 模拟共振峰，最终为你的古风旋律或史诗配乐注入灵魂。</p>
+<hr />
+<h2 id="2-oscillator">2. 振荡器（Oscillator）：选择声音的“材质”</h2>
+<p>在 Sonic Pi 中，<code>use_synth :name</code> 本质上是在选择<strong>波形（Waveform）</strong>。波形决定了声音的<strong>基频</strong>与<strong>泛音（Harmonics）</strong>的比例。</p>
+<p>你可以把波形想象成雕塑的<strong>原材料</strong>：</p>
+<h3 id="21">2.1 四大基础波形与风格映射</h3>
+<div class="codehilite"><pre><span></span><code>波形 (Waveform)     | 频谱特征 (Spectrum/Harmonics)      | 听感与风格应用
+--------------------|-----------------------------------|---------------------------------------
+正弦波 (Sine)       |  |                                | 【水、光、纯净】
+:sine               |  1 (仅基频)                        | 听：无质感、圆润、甚至由于太纯而显得“假”。
+                    |                                   | 用法：Sub-Bass (超低频垫底)、模拟口哨、
+                    |                                   |       叠加在其他声音上增加“厚度”。
+--------------------|-----------------------------------|---------------------------------------
+三角波 (Triangle)   |  |     .     .     .              | 【木头、竹子、温润】
+:tri                |  1     3     5     7              | 听感：比正弦波多一点“鼻音”，柔和但不刺耳。
+                    | (奇数泛音，快速衰减)                | 用法：久石让式的长笛、马林巴、
+                    |                                   |       柔和的类比合成器主奏 (Lead)。
+--------------------|-----------------------------------|---------------------------------------
+方波/脉冲 (Square)  |  |     |     |     |              | 【簧片、空心管、游戏感】
+:pulse / :square    |  1     3     5     7              | 听感：中空、像单簧管/双簧管、有明显的“嗡嗡”声。
+                    | (奇数泛音，衰减较慢)                | 用法：古风里的“笙/管”类音色、
+                    |                                   |       调整脉宽可做 8-bit 复古音效。
+--------------------|-----------------------------------|---------------------------------------
+锯齿波 (Sawtooth)   |  |  |  |  |  |  |  |              | 【弦乐、铜管、电流、能量】
+:saw / :dsaw        |  1  2  3  4  5  6  7  8           | 听感：极其明亮、刺耳、占据整个频谱。
+                    | (包含所有整数泛音)                  | 用法：Hans Zimmer 式的史诗低音 (Braaam)、
+                    |                                   |       模拟小提琴/大提琴组、Trance 舞曲。
+</code></pre></div>
+
+<blockquote>
+<p><strong>💡 专家提示：<code>:dsaw</code> (Detuned Saw) 的魔力</strong>
+Hans Zimmer 的声音之所以厚重，是因为他很少使用单一个 <code>:saw</code>。<code>:dsaw</code> 模拟了两个音高有微小差异的锯齿波叠加，产生了<strong>相位抵消与增强（Phasing）</strong>，听起来自带天然的立体声宽度和合唱感。</p>
+</blockquote>
+<hr />
+<h2 id="3-adsr">3. 包络（ADSR）：雕刻时间的“形状”</h2>
+<p>如果波形是材质，<strong>ADSR</strong> 就是你如何演奏它。
+它是 <code>play</code> 命令中 <code>attack</code>, <code>decay</code>, <code>sustain</code>, <code>release</code> 四个参数的物理意义。</p>
+<h3 id="31">3.1 声音的生命周期图解</h3>
+<div class="codehilite"><pre><span></span><code>音量 (Amplitude)
+  ^
+  |     /\ (Peak Level)
+  |    /  \
+  |   /    \ &lt;--- Decay (衰减): 从最大音量落到保持音量的时间
+  |  /      \_______________________
+  | /       |                       |
+  |/        | &lt;--- Sustain (保持):  |
+
+  +         |      按住琴键时的音量   | \
+  | Attack  |      (注意是音量级)    |  \ &lt;--- Release (释音):
+  | (起音)  |                       |   \     松手后声音消失的时间
+  |_________|_______________________|____\_____&gt; 时间
+</code></pre></div>
+
+<h3 id="32-adsr">3.2 不同乐器的 ADSR 黄金法则</h3>
+<p>在 Sonic Pi 中，这四个参数决定了你是在模仿古筝还是大提琴。</p>
+<h4 id="a">A. 弹拨/敲击类（古筝、琵琶、钢琴、钟）</h4>
+<p>这类乐器的特点是：<strong>能量在瞬间爆发，然后不可逆地衰减</strong>。没有“保持”阶段。</p>
+<ul>
+<li><strong>Rule</strong>: <code>attack: 0</code> (或极短), <code>sustain: 0</code>, <code>decay: 短</code>, <code>release: 长</code></li>
+<li><strong>Sonic Pi 代码</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 古筝/琵琶感</span>
+<span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span><span class="w"> </span><span class="ss">decay</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">sustain</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</code></pre></div>
+
+<h4 id="b-pad">B. 拉弦/吹管类（二胡、笛子、小提琴、Pad）</h4>
+<p>这类乐器需要<strong>物理激发时间</strong>（弓摩擦弦、气流建立驻波）。</p>
+<ul>
+<li><strong>Rule</strong>: <code>attack: 中/长</code>, <code>sustain: 1</code> (满音量保持), <code>release: 中</code></li>
+<li><strong>Sonic Pi 代码</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 弦乐群/Pad</span>
+<span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">sustain</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">**</span><span class="n">陷阱</span><span class="o">**:</span><span class="w"> </span><span class="n">如果</span><span class="w"> </span><span class="n n-Quoted">`attack`</span><span class="w"> </span><span class="n">设为</span><span class="w"> </span><span class="n">0，弦乐听起来就会像手风琴或电子琴，瞬间失去了“史诗感”。</span>
+</code></pre></div>
+
+<h4 id="c-hans-zimmer-spiccato">C. Hans Zimmer 式短促打击（Spiccato）</h4>
+<p>虽然是弦乐，但作为节奏使用时，需要强的颗粒感。</p>
+<ul>
+<li><strong>Rule</strong>: <code>attack: 短</code>, <code>release: 短</code> (切断残响，留出空间给下一拍)</li>
+<li><strong>Sonic Pi 代码</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 动作片里的紧张弦乐</span>
+<span class="n">play</span><span class="w"> </span><span class="ss">:c2</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mo">05</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+</code></pre></div>
+
+<hr />
+<h2 id="4">4. 滤波器与共振：重塑音色与共振峰</h2>
+<p>这是从“物理波形”通向“真实乐器”的关键一步。
+<strong>Filter (滤波器)</strong> = 减法（切掉不需要的频率）。
+<strong>Resonance (共振/Q值)</strong> = 强调（在切断点附近产生尖峰）。</p>
+<p>在 Sonic Pi 中，<code>cutoff:</code> 控制切哪里，<code>res:</code> 控制切口的锋利度。</p>
+<h3 id="41-cutoff">4.1 <code>cutoff</code> 的情绪色彩</h3>
+<ul>
+<li><strong><code>cutoff: 60-80</code> (暗/远/厚)</strong>：像是蒙着被子听声音，或者远处的雷声。适合 Bass 和背景铺底 (Pad)，不抢占主角位置。</li>
+<li><strong><code>cutoff: 90-110</code> (中/暖/木)</strong>：大部分原声乐器的主体区域。</li>
+<li><strong><code>cutoff: 120-130</code> (亮/近/刺)</strong>：完全打开，泛音丰富，甚至带有滋滋声。</li>
+</ul>
+<h3 id="42-res">4.2 <code>res</code> 的魔法：制造“材质”与“元音”</h3>
+<p>当 <code>res</code> 过 0.7 时，滤波器就不再只是“变暗”，而是开始<strong>啸叫</strong>。这种特定的频率凸起，非常像人类口腔改变形状产生元音（a, o, e）的原理，即<strong>共振峰（Formant）</strong>。</p>
+<ul>
+<li><strong>模拟古风笛/箫的气流感</strong>：
+    使用 <code>:noise</code> 或 <code>:bnoise</code>，配合<strong>高 Resonance</strong> 的带通滤波器。</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 模拟一阵穿过竹管的风声</span>
+<span class="n">use_synth</span><span class="w"> </span><span class="ss">:bnoise</span>
+<span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">     </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">res</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="o">*</span><span class="n">解析：</span><span class="n n-Quoted">`:bnoise`</span><span class="w"> </span><span class="n">是宽频噪音，高</span><span class="w"> </span><span class="n n-Quoted">`res`</span><span class="w"> </span><span class="n">强行把噪音聚焦在</span><span class="w"> </span><span class="n n-Quoted">`cutoff`</span><span class="w"> </span><span class="n">附近，形成一种类似吹管的“嘘嘘”声。</span><span class="o">*</span>
+</code></pre></div>
+
+<ul>
+<li><strong>模拟合成器扫描 (Filter Sweep)</strong>：
+    让 <code>cutoff</code> 动起来，声音就会有“哇-哇”的动态感。</li>
+</ul>
+<hr />
+<h2 id="5">5. 调制与随机性：注入生命力</h2>
+<p>真实世界没有两个完全相同的音符。电脑合成之所以“假”，是因为太完美。</p>
+<h3 id="51-randomization">5.1 随机化 (Randomization)</h3>
+<p>不要写死数值，给参数一个<strong>范围</strong>。</p>
+<ul>
+<li><strong>力度人性化</strong>：<code>amp: rrand(0.8, 1.0)</code></li>
+<li><strong>音色微妙变化</strong>：<code>cutoff: rrand(90, 110)</code></li>
+<li><strong>时间微小偏移</strong>：<code>sleep 0.25 + rrand(-0.01, 0.01)</code> (模拟演奏者的节奏摇摆)</li>
+</ul>
+<h3 id="52-lfo">5.2 颤音与调制 (LFO)</h3>
+<p>Sonic Pi 的许多 Synth (如 <code>:prophet</code>, <code>:blade</code>) 自带 LFO 参数。</p>
+<ul>
+<li><strong>Vibrato (揉弦)</strong>：调制音高 (<code>pitch</code>)。让长音像二胡或歌唱家一样抖动。</li>
+<li><strong>Tremolo (震音)</strong>：调制音量 (<code>amp</code>)。</li>
+<li><strong>Pulse Width Modulation (PWM)</strong>：调制脉冲宽度。这是模拟复古合成器和丰富弦乐质感的经典手法。</li>
+</ul>
+<hr />
+<h2 id="6-recipes">6. 进阶音色配方 (Recipes)</h2>
+<p>这里提供三个针对本书目标风格的“预制菜”。</p>
+<h3 id="a-pad">配方 A：华语古风“空灵” Pad</h3>
+<p><strong>目标</strong>：营造云雾缭绕的背景，不抢戏腔。</p>
+<ul>
+<li><strong>Synth</strong>: <code>:hollow</code> (自带类管乐特征) 或 <code>:dark_ambience</code></li>
+<li><strong>关键参数</strong>:<ul>
+<li><code>attack: 2</code>, <code>release: 4</code> (极慢的呼吸)</li>
+<li><code>cutoff: 80</code> (保持暗淡)</li>
+<li><code>amp: 0.6</code></li>
+</ul>
+</li>
+<li><strong>写法</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">use_synth</span><span class="w"> </span><span class="ss">:hollow</span>
+<span class="n">play_chord</span><span class="w"> </span><span class="o">[</span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">:g4</span><span class="p">,</span><span class="w"> </span><span class="ss">:a4</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</code></pre></div>
+
+<h3 id="b-lead">配方 B：久石让式“纯净” Lead</h3>
+<p><strong>目标</strong>：像《千与千寻》中那种温暖、甚至带点木头味的旋律音色。</p>
+<ul>
+<li><strong>Synth</strong>: <code>:tri</code> (三角波) 或 <code>:pluck</code> (如果需要颗粒感)</li>
+<li><strong>关键参数</strong>:<ul>
+<li><code>attack: 0.05</code> (稍微有一点点头，不完全软)</li>
+<li><code>cutoff: 100</code> (适度明亮)</li>
+<li><strong>重点</strong>: 必须加混响！</li>
+</ul>
+</li>
+<li><strong>写法</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">with_fx</span><span class="w"> </span><span class="ss">:reverb</span><span class="p">,</span><span class="w"> </span><span class="ss">room</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:tri</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:e5</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mo">05</span><span class="p">,</span><span class="w"> </span><span class="ss">sustain</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="czimmer-braaam">配方 C：Zimmer 式“铜管脉冲” (Braaam)</h3>
+<p><strong>目标</strong>：电影预告片里那种震撼低音。</p>
+<ul>
+<li><strong>Synth</strong>: <code>:dsaw</code> (失谐锯齿波)</li>
+<li><strong>关键参数</strong>:<ul>
+<li><code>detune: 0.2</code> (加大失谐，制造宽度和粗糙感)</li>
+<li><code>cutoff: 70</code> (低沉) 但 <code>attack</code> 时让 cutoff 瞬间打开 (Filter Envelope) - <em>注：这需要 automation，简单做法是直接给一个中等的 cutoff</em>。</li>
+<li><code>low_note</code>: 必须在 <code>:c2</code> 或 <code>:c1</code> 八度。</li>
+</ul>
+</li>
+<li><strong>写法</strong>:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">use_synth</span><span class="w"> </span><span class="ss">:dsaw</span>
+<span class="n">play</span><span class="w"> </span><span class="ss">:c2</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">detune</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span>
+</code></pre></div>
+
+<hr />
+<h2 id="7">7. 频谱掩蔽：为人声“让路”</h2>
+<p>这是本书最重要的声学概念之一。
+<strong>频谱掩蔽 (Masking)</strong>：如果两个声音频率相近且音量相当，人耳只能听到较响的那个，较弱的会被“吃掉”。</p>
+<ul>
+<li><strong>冲突区</strong>：人声（尤其是戏腔/女声）的主要能量集中在 <strong>500Hz - 2kHz</strong> (MIDI 音符 71 - 96 附近)。</li>
+<li><strong>常见错误</strong>：在这里堆满了明亮的合成器 Pad 或吉他。</li>
+<li><strong>解决方案</strong>：<ol>
+<li><strong>编曲让位</strong>：当人声出来时，乐器不要在人声的音域演奏，去演奏低音或极高音。</li>
+<li><strong>EQ 让位 (Sonic Pi 版)</strong>：使用滤波器挖空中间。</li>
+</ol>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 使用 band_stop (带阻滤波器) 切掉人声频段</span>
+<span class="n">with_fx</span><span class="w"> </span><span class="ss">:bpf</span><span class="p">,</span><span class="w"> </span><span class="ss">centre</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="ss">mix</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="c1"># 这里的 centre 是 MIDI 音符</span>
+<span class="w">   </span><span class="c1"># 播放伴奏</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="mf">3.</span><span class="w">  </span><span class="o">**</span><span class="n">音色变暗</span><span class="o">**</span><span class="n">：人声出现时，通过</span><span class="w"> </span><span class="n n-Quoted">`control`</span><span class="w"> </span><span class="n">命令降低伴奏</span><span class="w"> </span><span class="n">synth</span><span class="w"> </span><span class="n">的</span><span class="w"> </span><span class="n n-Quoted">`cutoff`</span><span class="n">。</span>
+</code></pre></div>
+
+<hr />
+<h2 id="8">8. 本章小结</h2>
+<ol>
+<li><strong>材质 (Waveform)</strong>：古风多用 <code>:tri</code>/:pulse (木/管)，Zimmer 多用 <code>:saw</code>/:dsaw (弦/铜)。</li>
+<li><strong>形态 (ADSR)</strong>：<code>attack</code> 决定是“击打”还是“拉奏”；<code>release</code> 决定空间感。</li>
+<li><strong>明暗 (Filter)</strong>：低 <code>cutoff</code> 做背景，高 <code>cutoff</code> 做主角。</li>
+<li><strong>共振 (Resonance)</strong>：高 <code>res</code> 可以模拟物理腔体共鸣和风声。</li>
+<li><strong>不完美即真实</strong>：永远使用 <code>rrand</code> 给音量、音色和时间微小的随机性。</li>
+</ol>
+<hr />
+<h2 id="9">9. 练习题</h2>
+<h3 id="50">基础题 (50%)</h3>
+<details>
+<summary><strong>练习 7.1：看图填空 (ADSR)</strong></summary>
+<p><br>
+你想模拟一个“古寺敲钟”的声音。钟声的物理特性是：撞击极快，没有延音阶段（手不按着也响），余音极长。
+请填空：
+<code>play :c3, attack: ___, decay: ___, sustain: ___, release: ___</code></p>
+<ul>
+<li>A. <code>attack: 2, sustain: 2, release: 0.1</code></li>
+<li>B. <code>attack: 0.01, sustain: 0, decay: 0.1, release: 4</code></li>
+<li>C. <code>attack: 0.1, sustain: 1, release: 1</code></li>
+</ul>
+<p><strong>提示：</strong> 钟声是“一次性激发”的能量。</p>
+<details>
+<summary><strong>参考答案</strong></summary>
+<p><strong>选 B</strong>。</p>
+<ul>
+<li><code>attack: 0.01</code>: 撞击瞬间。</li>
+<li><code>sustain: 0</code>: 钟声没有“保持平稳”的阶段，撞击后立即开始变弱。</li>
+<li><code>release: 4</code>: 金属的余振非常长。</li>
+</ul>
+</details>
+</details>
+<p><br></p>
+<details>
+<summary><strong>练习 7.2：为“戏腔”腾出空间</strong></summary>
+<p><br>
+你正在写一段高潮副歌，戏腔人声已经录好。你的背景合成器 (Synth Pad) 太亮了，导致人声听不清楚。
+除了调小音量 (<code>amp</code>)，你应该调整哪个参数来让背景音色“变暗”、“退后”？</p>
+<p><strong>提示：</strong> 哪个参数控制高频的通过量？</p>
+<details>
+<summary><strong>参考答案</strong></summary>
+<p>降低 <strong><code>cutoff</code></strong> (截止频率)。例如从 110 降到 70-80。这会切除背景的高频泛音，把清晰度留给人声</p>
+</details>
+</details>
+<p><br></p>
+<details>
+<summary><strong>练习 7.3：风格配对</strong></summary>
+<p><br>
+将下列 Sonic Pi 合成器与对应的最佳用途连线：</p>
+<ol>
+<li><code>:dsaw</code> (Detuned Saw)</li>
+<li><code>:hollow</code></li>
+<li><code>:chipbass</code></li>
+</ol>
+<p>a. 8-bit 怀旧游戏或古风快节奏段落的底盘
+b. Hans Zimmer 式的宽广弦乐/铜管墙
+c. 古风/仙侠剧中的空灵背景氛围</p>
+<details>
+<summary><strong>参考答案</strong></summary>
+<p>1 - b (Zimmer 宽广厚度)
+2 - c (空灵氛围)
+3 - a (8-bit 游戏/硬朗低音)</p>
+</details>
+</details>
+<h3 id="50_1">挑战题 (50%)</h3>
+<details>
+<summary><strong>练习 7.4：制作“呼吸感”的 Pad (自动化参数)</strong></summary>
+<p><br>
+<strong>目标</strong>：写一个持续 4 拍的长音，要求它的亮度 (<code>cutoff</code>) 在这 4 拍内先变亮再变暗，模拟人在呼吸。
+<strong>提示</strong>：</p>
+<ol>
+<li><code>play</code> 命令发出声音后，会返回一个节点对象 (node)。</li>
+<li>使用 <code>control</code> 命令控制这个节点。</li>
+<li><code>cutoff_slide</code> 参数控制变化的平滑时间。</li>
+</ol>
+<details>
+<summary><strong>参考答案代码</strong></summary>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 这是一个非常经典的合成器技巧：Filter Sweep</span>
+<span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">sustain</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff_slide</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="n">control</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span><span class="w"> </span><span class="c1"># 声音发出后，命令它滑向 110</span>
+<span class="nb">sleep</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">control</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w">  </span><span class="c1"># 2秒后，命令它滑回 60</span>
+<span class="nb">sleep</span><span class="w"> </span><span class="mi">2</span>
+</code></pre></div>
+
+</details>
+</details>
+<p><br></p>
+<details>
+<summary><strong>练习 7.5：物理建模——风吹竹林</strong></summary>
+<p><br>
+<strong>目标</strong>：仅使用噪音 (<code>:bnoise</code> 或 <code>:noise</code>) 和滤波器，模拟大风吹过竹林的声音。
+<strong>要求</strong>：</p>
+<ol>
+<li>声音要有高低起伏（风速变化）。</li>
+<li>声音要有“管状”的啸叫感（高 Resonance）。</li>
+</ol>
+<details>
+<summary><strong>参考答案代码</strong></summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:bamboo_wind</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># 使用 bnoise (带通噪音) 配合极高的 res (0.9以上)</span>
+<span class="w">  </span><span class="c1"># rrand 用于模拟风的无常</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:bnoise</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">       </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="n">rrand</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="c1"># 风的强弱改变音调</span>
+<span class="w">       </span><span class="ss">res</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">95</span><span class="p">,</span><span class="w">             </span><span class="c1"># 极高共模拟竹管空腔</span>
+<span class="w">       </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">2</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+</details>
+<hr />
+<h2 id="10-gotchas">10. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1-clipping">1. 爆音与红灯 (Clipping)</h3>
+<ul>
+<li><strong>现象</strong>：声音破响，右上角示波器变红。</li>
+<li><strong>原因</strong>：Sonic Pi 是<strong>加法合成</strong>。三个音量为 <code>amp: 1</code> 的锯齿波叠加，总能量会轻易超过 1。</li>
+<li><strong>调试</strong>：<ul>
+<li><strong>Rule of Thumb</strong>：当你叠加乐器时，把每个乐器的 <code>amp</code> 降到 0.4 - 0.6。</li>
+<li>总线压缩：在最外层包裹 <code>with_fx :compressor do ... end</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-muddy-mix">2. 低频浑浊 (Muddy Mix)</h3>
+<ul>
+<li><strong>现象</strong>：加上鼓和贝斯后，整个音乐糊成一团，听不清旋律。</li>
+<li><strong>原因</strong>：因为你的 Pad、旋律、混响都包含了大量的低频垃圾（100Hz 以下）。</li>
+<li><strong>调试</strong>：给所有<strong>不是</strong>贝斯和底鼓的乐器，加上<strong>高通滤波器 (HPF)</strong>。</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">with_fx</span><span class="w"> </span><span class="ss">:hpf</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="c1"># 切掉 50Hz 以下的隆隆声</span>
+<span class="w">   </span><span class="n">play</span><span class="w"> </span><span class="ss">:c4</span><span class="w"> </span><span class="c1"># 旋律</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="3-machine-gun-effect">3. “机关枪”效应 (Machine Gun Effect)</h3>
+<ul>
+<li><strong>现象</strong>：快速连奏时（如模仿 Zimmer 的断奏弦乐），声音听起来极其机械、鬼畜。</li>
+<li><strong>原因</strong>：每次触发的采样完全一致，且完全对齐网格。</li>
+<li><strong>调试</strong>：<ol>
+<li>微调 <code>amp</code>: <code>amp: rrand(0.9, 1.1)</code></li>
+<li>微调 <code>cutoff</code>: <code>cutoff: rrand(100, 110)</code></li>
+<li>这是让电子乐“像人”的最廉价且有效的方法。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4_1">4. 混响滥用</h3>
+<ul>
+<li><strong>现象</strong>：为了古风空灵，把 Reverb 的 <code>room</code> 开到 1，<code>mix</code> 开到 1。结果声音像在下水道。</li>
+<li><strong>调试</strong>：<code>mix</code> 通常不要超过 0.4-0.5。保留干声（Dry Signal）是保证乐器“贴耳”和“清晰”的关键。古风的空灵更多来自<strong>休止符（留白）</strong>，而不是混响。</li>
+</ul>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter6.html" class="nav-link prev">← 第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</a><a href="chapter8.html" class="nav-link next">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材” →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 9 章：效果器链与混音入门——让作品“站起来”</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：Sonic Pi 快速上手——从 8 小节开始</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：从五线谱到代码——音高、时值与读谱映射</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：时间、同步与 Live Coding 思维</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：效果器链与混音入门——让作品“站起来”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：华语古风与戏腔专题——“腔、韵、留白、材质”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：结构与叙事——把段落写成“情绪弧线”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="9">第 9 章：效果器链与混音入门——让作品“站起来”</h1>
+<h2 id="1">1. 开篇段落</h2>
+<p>在前面的章节中，你已经掌握了如何用代码构建旋律、和弦与节奏织体。但如果此刻你按下 Run，你可能会发现结果并不尽如人意：声音听起来很“干”（Dry）、很“平”（Flat），甚至有点像廉价的电子贺卡。所有的乐器都挤在扬声器的正中间，互相打架，低音浑浊，高音刺耳。</p>
+<p><strong>混音（Mixing）不是后期的补救，而是作曲的延伸。</strong> 在 Sonic Pi 中，效果器（FX）不仅仅是修饰工具，它们是构建声音性格的关键组件。</p>
+<ul>
+<li>对于 <strong>久石让风格</strong>，混响决定了钢琴的“温度”和弦乐的“空气感”。</li>
+<li>对于 <strong>Hans Zimmer 风格</strong>，失真和压缩决定打击乐的“冲击力”和低音的“压迫感”。</li>
+<li>对于 <strong>华语古风/戏腔</strong>，延迟（Delay）和滤波决定了声音的“意境”和山谷般的“留白”。</li>
+</ul>
+<p>本章将带你建立<strong>频谱直觉</strong>和<strong>空间思维</strong>，教你如何通过效果器链（FX Chain）将枯燥的代码波形转化为具有电影质感的成品声音。</p>
+<hr />
+<h2 id="2">2. 文字论述与核心机制</h2>
+<h3 id="91-gain-staging">9.1 增益结构 (Gain Staging)：一切的起点</h3>
+<p>在加载任何酷炫的效果器之前，必须先谈谈“音量”。Sonic Pi 的声音是数字合成的，数字音频有一个不可逾越的“天花板”（0dB）。</p>
+<ul>
+<li><strong>加法危机</strong>：当你同时播放 4 个 <code>amp: 1</code> 的声音时，它们的总能量会叠加。如果超过天花板，就会发生<strong>削波失真（Clipping）</strong>——也就是难听的“爆音”或“破音”。</li>
+<li><strong>效果器的隐形增益</strong>：某些效果器（如 <code>distortion</code>, <code>compressor</code>）会提升音量；而某些（如 <code>hpf</code> 高通滤波）在切除频率后，反而能导致波形峰值改变。</li>
+<li><strong>信噪比误区</strong>：与模拟录音不同，Sonic Pi 内部没有“底噪”。所以你不需要为了“大声”而把每个声音都推到极限。</li>
+</ul>
+<p><strong>Rule of Thumb（经验法则）：</strong></p>
+<blockquote>
+<p><strong>“0.5 是新的 1.0”</strong>。养成习惯，将所有乐器的默认 <code>amp</code> 设为 <code>0.5</code> 或 <code>0.6</code>。这能为你后续叠加 Reverb（会增加总体积）或多层乐器留出宝贵的“头部空间（Headroom）”。</p>
+</blockquote>
+<h3 id="92-reverb">9.2 Reverb（混响）：构建物理空间</h3>
+<p>混响不仅是“回声”，它是告诉听众“我们在哪里”的心理暗示。</p>
+<h4 id="_1">三大风格的混响策略图解</h4>
+<p>| 风格 | 空间想象 | 关键参数策略 | 听感目标 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">风格</th>
+<th style="text-align: left;">空间想象</th>
+<th style="text-align: left;">关键参数策略</th>
+<th style="text-align: left;">听感目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>久石让 / 纯音乐</strong></td>
+<td style="text-align: left;">精致的音乐厅 (Concert Hall)</td>
+<td style="text-align: left;"><strong>Room:</strong> 中 (0.5-0.6)<br><strong>Mix:</strong> 低 (0.3-0.4)<br><strong>Damp:</strong> 高 (让尾音变暗，不抢戏)</td>
+<td style="text-align: left;"><strong>透明感</strong>。你能清晰听到钢琴的触键声，混响只是包裹在周围的一层光晕，不掩盖本体。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hans Zimmer / 史诗</strong></td>
+<td style="text-align: left;">巨大的洞穴/宇宙 (Cavern/Cosmos)</td>
+<td style="text-align: left;"><strong>Room:</strong> 极大 (0.8-0.9)<br><strong>Mix:</strong> 中高 (0.5+)<br><strong>Pre-amp:</strong> 适当推大</td>
+<td style="text-align: left;"><strong>融合感</strong>。乐器之间不再分明，而是融合成一堵巨大的“音墙”。短促的打击乐在混响中变成雷声。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>华语古风 / 戏腔</strong></td>
+<td style="text-align: left;">幽谷 / 竹林 (Misty Valley)</td>
+<td style="text-align: left;"><strong>Room:</strong> 大 (0.7+)<br><strong>HPF:</strong> <strong>关键！</strong>切掉混响的低频</td>
+<td style="text-align: left;"><strong>空灵感</strong>。只保留高频的残响（Air）。人声仿佛在远处，但低频不浑浊，像水墨画中的留白。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>FX 嵌套的位置学（重要）：</strong>
+在 Sonic Pi 中，<code>with_fx</code> 的位置决定了 CPU 的命运和声音的连贯性。</p>
+<ul>
+<li><strong>写法 A（包裹 Loop）</strong>：就像把吉他插进效果器踏板，再接音箱。所有声音共用一个混响“房间”。省 CPU，尾音自然连贯。<strong>（推荐用于整体空间）</strong></li>
+<li><strong>写法 B（在 Loop 内部）</strong>：就像每敲一下鼓，都瞬移到一个新房间，敲完立刻把房间炸掉。非常耗费 CPU，且上一音的尾音可能会被切断。<strong>（仅用于特殊断奏效果）</strong></li>
+</ul>
+<h3 id="93-delay-echo">9.3 Delay &amp; Echo（延迟与回声）：时间的韵律</h3>
+<p>对于古风和戏腔，Delay 比 Reverb 更具决定性。Reverb 是“晕染”，Delay 是“影子”。</p>
+<ul>
+<li><strong>节奏化延迟</strong>：不要使用默认的延迟时间。将延迟时间（<code>phase</code>）设置为节拍的数学倍数（如 0.25, 0.5, 0.75）。<ul>
+<li><em>戏腔技巧</em>：在乐句结尾使用 <code>phase: 0.75</code>（附点八分音符）的 Delay，会让尾音有一种“欲断还连”的拉扯感。</li>
+</ul>
+</li>
+<li><strong>乒乓延迟 (Ping Pong)</strong>：让回声在左右耳跳动。这能极大地加宽声场，而不会让中间位置（留给人声和 Bass）变得拥挤。</li>
+</ul>
+<h3 id="94-eq">9.4 滤波当 EQ：混音的核心是“减法”</h3>
+<p>很多初学者觉得作品“糊”（Muddy），原因都在于<strong>低频打架</strong>。
+贝斯、大提琴、钢琴低音区、甚至人声的胸腔共鸣都在 100Hz-300Hz 争抢空间。</p>
+<p><strong>ASCII 图解：频谱拥堵与让位</strong></p>
+<div class="codehilite"><pre><span></span><code>[ 糟糕的混音 ]：有乐器全频段开放
+Low (低频) -------------------------&gt; High (高频)
+Kick:  [========]
+Bass:  [=================]
+Piano: [=======================]
+Vocal: [=============================]
+Result: ^^^^^^^^ 
+       此处发生严重掩蔽，听起来像一团泥浆
+
+[ 清晰的混音 ]：使用了 HPF (高通滤波)
+Low (低频) -------------------------&gt; High (高频)
+Kick:  [========] (霸占极低频)
+Bass:      [=========] (避开 Kick 的冲击点)
+Piano:             [===========] (切掉了左边，只留中高频)
+Vocal:                 [=============] (切掉低频噪音)
+Result: 每个乐器都有自己的“泳道”，互不干扰。
+</code></pre></div>
+
+<p><strong>Rule of Thumb：</strong></p>
+<ul>
+<li>除了 <strong>Kick (底鼓)</strong> 和 <strong>Sub Bass (超低音)</strong>，<strong>给其他所有轨道</strong>都加上高通滤波 (<code>hpf</code>)。</li>
+<li>古风笛子/古筝：<code>hpf: 80</code> 到 <code>100</code>（MIDI 里的数值概念，或 cutoff 频率）。</li>
+<li>弦乐群：<code>hpf</code> 甚至可以开得更高，只留空气感。</li>
+</ul>
+<h3 id="95-distortion">9.5 失真 (Distortion) 与饱和：不仅仅是摇滚</h3>
+<p>在电影配乐（尤其是 Zimmer 风格）中，失真是让合成器具有“抓耳力”的秘密武器。</p>
+<ul>
+<li><strong>原理</strong>：纯正弦波（Sine）在小喇叭（如手机）上是听不见的。加一点失真（Distortion/Bitcrusher）会产生<strong>谐波</strong>（Overtones），让低音在中高频也有了“投影”。</li>
+<li><strong>应用</strong>：<ul>
+<li><strong>温暖度</strong>：极低参数的 <code>tanh</code> (Tape Saturation 模拟) 能让数码味太重的声音变暖。</li>
+<li><strong>存在感</strong>：给低音脉冲加 <code>distortion</code>，能让它在配乐密集时依然能“切”出来。</li>
+</ul>
+</li>
+</ul>
+<h3 id="96-panning">9.6 宽度与声像 (Panning)</h3>
+<p>不要把所有东西都堆在正中间（<code>pan: 0</code>）。想象你在通过声音构建一个舞台。</p>
+<ul>
+<li><strong>Center (中间)</strong>：主角位。留给 Kick、Snare、Bass、主唱/主奏乐器（戏腔）。</li>
+<li><strong>Sides (两翼)</strong>：氛围位。Pad、伴奏弦乐、分解和弦。</li>
+<li><strong>Movement (运动)</strong>：使用 LFO 控制 <code>pan</code>，让古风的特效音（如风铃、风声）在左右耳之间缓慢漂移制造“环绕感”。</li>
+</ul>
+<h3 id="97-automation">9.7 自动化 (Automation)：让效果“活”起来</h3>
+<p>静态的效果器是死板的。现代配乐要求声音随情绪流动。</p>
+<ul>
+<li><strong>Filter Sweep (扫频)</strong>：在 8 小节的 Build-up（推进段）中，让低通滤波 (<code>lpf</code>) 的 <code>cutoff</code> 值从 60 逐渐增加到 120。这创造了经典的“大门缓缓打开”或“能量积蓄”的听感。</li>
+<li><strong>Reverb Throw</strong>：平时 Reverb 很小，但在歌手唱完一句的瞬间，突然推大 Reverb 的 <code>mix</code>，制造一个巨大的尾音，然后迅速收回来。</li>
+</ul>
+<hr />
+<h2 id="3">3. 本章小结</h2>
+<ol>
+<li><strong>Gain Staging</strong>：默认 <code>amp: 0.5</code>，永远预留头部空间，避免数字失真。</li>
+<li><strong>Reverb 哲学</strong>：久石让（小而清）、Zimmer（大而深）、古风（高而远）。不同的参数讲述不同的故事。</li>
+<li><strong>EQ 思维</strong>：混音就是“切除不需要的频率”。<strong>HPF（高通）</strong> 是你最强大的清洁工具，用于清理低频泥浆。</li>
+<li><strong>Delay 技巧</strong>：使用附点或三连音的 Delay 时，让回声成为节奏律动的一部分。</li>
+<li><strong>动态性</strong>：不要设置好参数就不管了。让 Filter 的开合、Reverb 的干湿比随着音乐段落（Intro -&gt; Verse -&gt; Chorus）而变化。</li>
+</ol>
+<hr />
+<h2 id="4">4. 练习题</h2>
+<h3 id="_2">基础题（熟悉参数与听感）</h3>
+<p><strong>练习 9.1：频谱清洁工</strong></p>
+<ul>
+<li><strong>目标</strong>：理解 HPF 的作用。</li>
+<li><strong>操作</strong>：<ol>
+<li>写一个低音非常重的 <code>saw</code> 波 Bass 循环。</li>
+<li>同时写一个中高音的 <code>piano</code> 旋律。</li>
+<li>此时声音可能很糊。给 Piano 加上 <code>hpf</code>（高通滤波）。</li>
+<li>尝试调节 <code>cutoff</code> 参数（从 60 到 100）。</li>
+</ol>
+</li>
+<li><strong>思考</strong>：在哪个数值，你既能听清 Piano，又觉得 Bass 突然变清晰了？</li>
+</ul>
+<details>
+<summary>点击查看提示 (Hint)</summary>
+<p>通常在 Sonic Pi 的 MIDI 音符系统中，<code>cutoff: 80</code> 左右能切掉大部分乐器的低频浑浊区，但这取决于你的基频。试着一点点往上加，直到钢琴变“薄”，往回退一点点，那就是甜蜜点（Sweet Spot）。</p>
+</details>
+<p><strong>练习 9.2：干湿比例盲测</strong></p>
+<ul>
+<li><strong>目标</strong>：掌握 Reverb 的深度。</li>
+<li><strong>操作</strong>：<ol>
+<li>播放一段简单的军鼓（Snare）或打击乐。</li>
+<li>将 Reverb 的 <code>mix</code> 设为 0.1。听起来像在面前。</li>
+<li>将 <code>mix</code> 设为 0.5。听起来像在房间里。</li>
+<li>将 <code>mix</code> 设为 0.9。听起来像在隔壁房间。</li>
+<li>尝试调节 <code>room</code> 大小，配合 <code>mix</code>。</li>
+</ol>
+</li>
+</ul>
+<details>
+<summary>参考答案思路</summary>
+<p>Zimmer 式的史诗打击乐通常是 <code>room</code> 很大（0.8+），但 <code>mix</code> 保持在 0.4-0.5，既要有巨大的尾音，又不能失去打击那一瞬间的冲击力（Transients）。</p>
+</details>
+<hr />
+<h3 id="_3">挑战题（进阶设计）</h3>
+<p><strong>练习 9.3：古风“空谷传响”效果链</strong></p>
+<ul>
+<li><strong>目标</strong>：设计一个专门用于“笛子”或“戏腔”的复合效果链。</li>
+<li><strong>要求</strong>：<ol>
+<li>声音要有回声，且回声越来越暗（模拟自然衰减）。</li>
+<li>声音要有混响，但不能糊住低频。</li>
+<li>使用嵌套结构：<code>with_fx :reverb ... do with_fx :echo ... do ... end end</code>（思考谁在谁里面）。</li>
+</ol>
+</li>
+<li><strong>思考</strong>：是先有回声再进混响，还是先混响再进回声？这两种听起来有什么不同？</li>
+</ul>
+<details>
+<summary>点击查看提示 (Hint)</summary>
+<p>自然界中，回声（反射）发生后，会在空间中进一步散射（混响）。通常推荐：最内层发声 -&gt; 中间层 Echo -&gt; 最外层 Reverb。
+为了让回声变暗，可以在 Echo 的参数中寻找 <code>decay</code> 相关的滤波设置，或者简单的让 Reverb 的 <code>damp</code> 参数变大。
+关键点：给 Reverb 加上 <code>high_pass</code> 或者在链条里加一个 <code>hpf</code>，切掉回声累积产生的低频隆隆声。</p>
+</details>
+<p><strong>练习 9.4：Zimmer 的“愤怒大提琴”</strong></p>
+<ul>
+<li><strong>目标</strong>：通过失真和滤波制造紧张感。</li>
+<li><strong>操作</strong>：<ol>
+<li>使用一个类似大提琴或锯齿波的持续低音。</li>
+<li>加入 <code>distortion</code> 效果器。</li>
+<li>编写自动化逻辑（或手动修改参数），让 <code>distortion</code> 的程度 (<code>distort</code>) 和低通滤的 <code>cutoff</code> 在 16 拍内同步增加。</li>
+<li>体验声音从“温和”变得“愤怒”的过程。</li>
+</ol>
+</li>
+</ul>
+<details>
+<summary>参考答案思路</summary>
+<p>这模拟了管弦乐团从 <code>mp</code> 到 <code>fff</code> 的动态变化。在电子配乐中，单纯增加音量是不够的，必须增加“谐波密度”（通过失真）和“频宽”（通过打开滤波器），才能让人耳感觉到强度的提升。</p>
+</details>
+<hr />
+<h2 id="5-gotchas">5. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1-the-mud-bath">1. 泥浆浴 (The Mud Bath)</h3>
+<ul>
+<li><strong>现象</strong>：整体声音轰隆隆响成一片，没有任何细节，只有一团低频噪音。</li>
+<li><strong>原因</strong>：给 Sub Bass、Kick 或者本身低频就很丰富的 Pad 加了全频段的 Reverb。</li>
+<li><strong>调试技巧</strong>：<strong>低音原则上不加混响</strong>。如果必须加，必须使用带 <code>high_pass</code> 参数的混响，或者在混响前串联一个 HPF，确保只有 200Hz 以上的声音进入混响器。</li>
+</ul>
+<h3 id="2-cpu-cracklingoverload">2. CPU 爆炸与爆音 (Crackling/Overload)</h3>
+<ul>
+<li><strong>现象</strong>：声音卡顿、噼里啪啦响，Sonic Pi 提示“Timing Error”。</li>
+<li><strong>原因</strong>：<strong>在 <code>live_loop</code> 内部疯狂创建重型效果器</strong>。比如你在一个每秒触发 4 次的鼓循环里写了 <code>with_fx :reverb</code>。这意味着每秒钟电脑要新开 4 个混响房间！</li>
+<li><strong>调试技巧</strong>：<strong>FX 外置</strong>。把 <code>with_fx</code> 写在 <code>live_loop</code> 的<strong>外面</strong>。这样无论循环跑多少次，都只使用这一个效果器实例。</li>
+</ul>
+<h3 id="3-phase-cancellation-mono-incompatibility">3. 消失的立体声 (Phase Cancellation / Mono Incompatibility)</h3>
+<ul>
+<li><strong>现象</strong>：戴耳机听很宽很美，但用手机外放或蓝牙单声道音箱听，某个乐器突然声音变极小甚至消失了。</li>
+<li><strong>原因</strong>：过度使用立体声扩宽效果（如反相位的 Delay），导致左声道和右声道的波形刚好抵消。</li>
+<li><strong>调试技巧</strong>：偶尔用单声道（Mono）检查你的混音。主要乐器（Kick, Bass, Lead Vocal）尽量保持在声像中间，不要过度依赖相位特效。</li>
+</ul>
+<h3 id="4-ear-fatigue">4. 听觉疲劳 (Ear Fatigue)</h3>
+<ul>
+<li><strong>现象</strong>：听了 20 分钟后，觉得高频不够亮，于是继续加高音，结果第二天听发现刺耳得要命。</li>
+<li><strong>原因</strong>：人耳对高频非常容易适应并变得迟钝。</li>
+<li><strong>Rule of Thumb</strong>：混音时音量开小一点。每 30 分钟休息一下耳朵。如果第二天听觉得刺耳，那就相信第二天的判断。</li>
+</ul>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter8.html" class="nav-link prev">← 第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</a><a href="chapter10.html" class="nav-link next">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象” →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

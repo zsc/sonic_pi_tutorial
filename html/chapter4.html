@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：Sonic Pi 快速上手——从 8 小节开始</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：从五线谱到代码——音高、时值与读谱映射</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：时间、同步与 Live Coding 思维</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：效果器链与混音入门——让作品“站起来”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：华语古风与戏腔专题——“腔、韵、留白、材质”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：结构与叙事——把段落写成“情绪弧线”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="4">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</h1>
+<h2 id="41">4.1 开篇：从“报菜名”到“建筑学”</h2>
+<p>你可能已经掌握了基础的五线谱知识，知道 C 大调的顺阶和弦是 C, Dm, Em, F, G, Am, Bdim，也能在 Sonic Pi 里写出这样的代码：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 典型的“程序员式写歌”</span>
+<span class="c1"># 听起来僵硬、机械、像是在测试声卡</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:chords</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:saw</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:g4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:a4</span><span class="p">,</span><span class="w"> </span><span class="ss">:minor</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:f4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>这段代码的问题在于：<strong>它只是在“报出”和弦的名字（报菜名），而不是在“构建”音乐（建筑学）。</strong></p>
+<p>在真实的声学乐（如钢琴或管弦乐团）中，演奏者绝不会如此生硬地搬运音块。本章的目标是教你如何将抽象的“和弦符号（I-V-vi-IV）”转化为具有风格特征的<strong>织体（Texture）</strong>。</p>
+<p>我们将从<strong>声部连接（Voice Leading）</strong>入手解决生硬感，利用<strong>扩展音（Extensions）</strong>建立色彩，最后通过<strong>算法化的演奏模式</strong>来实现古风的留白、久石让的流利与 Hans Zimmer 的压迫感。</p>
+<hr />
+<h2 id="42">4.2 常见进行的“情绪词典”与频谱色彩</h2>
+<p>在开始写代码之前，我们需要建立一个“情绪映射”。不同的和弦进行不仅是乐理上的排列，更是特定文化和频率能量的某种暗示。</p>
+<h3 id="1-i-v-vi-iv">1. 史诗/流行万能公式 (I - V - vi - IV)</h3>
+<ul>
+<li><strong>代码表示</strong>：<code>[:c, :g, :a, :f]</code> (配合大/小调性质)</li>
+<li><strong>能量特征</strong>：<ul>
+<li><strong>I (稳定)</strong> -&gt; <strong>V (最大张力/导向)</strong> -&gt; <strong>vi (意外的阴郁/转折)</strong> -&gt; <strong>IV (在大调中带有抬升感的半终止)</strong>。</li>
+<li>这是 Hans Zimmer 在构建宏叙事时常用的骨架（例如《狮子王》或英雄主题的变体）。</li>
+</ul>
+</li>
+<li><strong>Rule of Thumb</strong>：如果你不知道写什么，先写这个，把重点放在音色设计上。</li>
+</ul>
+<h3 id="2-j-pop-iv-v-iii-vi">2. 久石让/J-Pop 的“王道进行” (IV - V - iii - vi)</h3>
+<ul>
+<li><strong>代码表示</strong>：<code>[:f, :g, :e, :a]</code></li>
+<li><strong>听感分析</strong>：<ul>
+<li>这种进行<strong>不从主音（I）开始</strong>，一上来就是不稳定的 IV 级，给人一种“故事已经开始”或“半途切入”的流动感。</li>
+<li><strong>关键点</strong>：<strong>V -&gt; iii</strong> (G -&gt; Em) 的连接非常细腻。如果把 iii (Em) 换成 <strong>III7 (E7, <code>chord(:e, :7)</code>)</strong>，引入了 <code>#G</code> 音，会强烈导向 <code>Am</code>，瞬间增加戏剧性和宿命感（离调）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-vi-iv-i-v-i-vii-vi-v">3. 华语古风/悲情 (vi - IV - I - V) 或 (i - VII - VI - V)</h3>
+<ul>
+<li><strong>代码表示</strong>：<ul>
+<li>现代古风（如《凉凉》类）：<code>[:a, :f, :c, :g]</code>。</li>
+<li>传统/异域小调下行：<code>[:a, :g, :f, :e]</code>。</li>
+</ul>
+</li>
+<li><strong>风格密码</strong>：<ul>
+<li>古风的和声往往不强调“功能性解决”（Dominant -&gt; Tonic），而是强调“色彩的并置”。</li>
+<li><strong>小调下行</strong> (Am - G - F - E) 配合 Phrygian 调式（弗里几亚），是表现苍凉感、武侠危机感的核心。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="43-voice-leading">4.3 声部连接 (Voice Leading)：消除“搬家感”</h2>
+<p>这是让你的代码听起来从“业余”变“专业”的性价比最高的手段。</p>
+<p><strong>声学问题</strong>：
+当你从 C4 (C-E-G) 换到 F4 (F-A-C) 时，所有音符都向上大跳。在物理声学中，人耳对于大幅度的频率跳变非常敏感，会将其感知为“断裂”。在钢琴演奏中，这也意味着手需要整个抬起来移动（搬家）。</p>
+<p><strong>解决原则</strong>：<strong>懒惰原则（Law of Laziness）</strong>。</p>
+<ol>
+<li><strong>共同音保持</strong>：如果两个和弦有相同的音，那个音不要动。</li>
+<li><strong>就近解决</strong>：其他音走最短的半音/全音路径。</li>
+</ol>
+<p>C 大三和弦 (C-E-G) 到 F 大三和弦，最近的走法是 (C-F-A)，这是 F 和弦的第二转位。</p>
+<div class="codehilite"><pre><span></span><code>ASCII 示意图：声部连接 (Voice Leading)
+
+[生硬的写法 / Root position jump]
+频域高区:             C5 (跳跃 5度)
+                     ^
+G4 ------------------|
+E4 ------------------+-&gt; A4 (跳跃 4度)
+C4 ------------------+-&gt; F4 (跳跃 4度)
+(C Major)           (F Major 原位)
+
+* 听感：块状、分离、笨重
+
+[平滑的写法 / Smooth Leading]
+A4 (仅上行 2度) &lt;----+
+F4 (仅上行 1度) &lt;----+-- G4
+C4 (保持不动!)  &lt;======= C4
+                    E4
+(F inv 2)           (C Major)
+
+* 听感：像胶水一样粘合，内部色彩在流动
+</code></pre></div>
+
+<p><strong>Sonic Pi 实现技巧</strong>：
+Sonic Pi 的 <code>chord_invert</code> 虽好用，但为了更精细的控制，建议直接控制八度。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 自动寻找最近转位的逻辑很难写，但我们可以手动“微调八度”</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:smooth_voice</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:tri</span>
+
+<span class="w">  </span><span class="c1"># C Major: C4, E4, G4</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">),</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">2</span>
+
+<span class="w">  </span><span class="c1"># F Major (转位): C4, F4, A4</span>
+<span class="w">  </span><span class="c1"># 我们不写 chord(:f4, :major)，因为那会是 F4, A4, C5</span>
+<span class="w">  </span><span class="c1"># 我们写 chord(:f3, :major, invert: 2) -&gt; 得到 C4, F4, A4</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:f3</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">,</span><span class="w"> </span><span class="ss">invert</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">2</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<blockquote>
+<p><strong>Rule of Thumb</strong>：当你写和弦进行时，试着让所有音符都保持在 <code>:c4</code> 到 <code>:c5</code> 这个狭窄的“黄金中频区”内，不要让它们跑出去。</p>
+</blockquote>
+<hr />
+<h2 id="44">4.4 延伸音与色彩：风格的调味料</h2>
+<p>三和弦是骨架，延伸音（Extensions）是皮肉。对于你想要的三种风格，有着截然不同的“香料”配方。</p>
+<h3 id="1-sus2-add9-6">1. 华语古风的“五声性中立” (sus2, add9, 6)</h3>
+<p>古风音乐（基于五声调式）非常忌讳强烈的三全音冲突（如 B 到 F）。为了让和弦听起来有“中国味”，我们必须<strong>模糊</strong>大三/小三和弦的界限。</p>
+<ul>
+<li><strong>秘密武器</strong>：<strong>sus2 (挂二和弦)</strong>。</li>
+<li><strong>原理</strong>：<code>Csus2</code> 的组成音是 C-D-G。它没有 E（决定大调性质的音）或 Eb（决定小调性质的音）。这三个音 (1, 2, 5) 都在中国传统的五声音阶内。</li>
+<li><strong>听感</strong>：空灵、像水墨画留白、没有攻击性。</li>
+<li><strong>代码</strong>：<code>chord(:c4, :sus2)</code> 或 <code>chord(:c4, :add9)</code>（增加高八度的2音，更明亮）。</li>
+</ul>
+<h3 id="2-major7-add9">2. 久石让的“怀旧滤镜” (Major7, add9)</h3>
+<p>久石让的钢琴曲听起来“丰富、温暖且略带伤感”，秘诀在于他不吝啬使用 <strong>Major7</strong> 和 <strong>9音</strong>。</p>
+<ul>
+<li><strong>秘密武器</strong>：<strong>Major7 (大七和弦)</strong>。</li>
+<li><strong>原理</strong>：在 F 和弦中加入 E 音 (F-A-C-E)。E 音和 F 音是大七度，和 C 音是大三度，产生极其丰富的泛音列摩擦。</li>
+<li><strong>听感</strong>：都市感、回忆、纯真。</li>
+<li><strong>代码</strong>：<code>chord(:f4, :major7)</code>。</li>
+</ul>
+<h3 id="3-hans-zimmer-sus4-minor7">3. Hans Zimmer 的“悬停张力” (sus4, minor7)</h3>
+<p>Zimmer 喜欢用 <strong>sus4</strong> 制造一种“未解决”的紧张感，或者通过极简的小三和弦堆叠。</p>
+<ul>
+<li><strong>秘密武器</strong>：<strong>sus4 解决到 major</strong>。</li>
+<li><strong>用法</strong>：先播放 <code>chord(:c4, :sus4)</code> (C-F-G)，听众会期待 F 解决到 E，但你故意拖延，制造悬疑感。</li>
+</ul>
+<hr />
+<h2 id="45">4.5 织体设计：代码即乐手</h2>
+<p>这是本章的核心。有了和弦后，怎么“弹”决定了风格。我们将直接给出种风格的算法模板。</p>
+<h3 id="a">A. 风格：华语古风/久石让</h3>
+<p><strong>织体关键词</strong>：<strong>分解和弦 (Arpeggios) + 流动</strong>
+不要同时按下所有键，而是像流水一样拆开。久石让常用“左手跨八度”的分解。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># --- 模板 A：久石让/古风 钢琴分解 ---</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:piano_arpeggio</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:piano</span>
+<span class="w">  </span><span class="c1"># 模拟钢琴的稍微不完美的调音和氛围</span>
+<span class="w">  </span><span class="n">use_synth_defaults</span><span class="w"> </span><span class="ss">hard</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">vel</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">stereo_width</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">8</span>
+
+<span class="w">  </span><span class="c1"># 定义和弦进行：IV - V - iii - vi (王道进行)</span>
+<span class="w">  </span><span class="n">chords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="w">    </span><span class="n">chord</span><span class="p">(</span><span class="ss">:f3</span><span class="p">,</span><span class="w"> </span><span class="ss">:major7</span><span class="p">),</span>
+<span class="w">    </span><span class="n">chord</span><span class="p">(</span><span class="ss">:g3</span><span class="p">,</span><span class="w"> </span><span class="ss">:dom7</span><span class="p">),</span>
+<span class="w">    </span><span class="n">chord</span><span class="p">(</span><span class="ss">:e3</span><span class="p">,</span><span class="w"> </span><span class="ss">:m7</span><span class="p">),</span>
+<span class="w">    </span><span class="n">chord</span><span class="p">(</span><span class="ss">:a3</span><span class="p">,</span><span class="w"> </span><span class="ss">:m7</span><span class="p">)</span>
+<span class="w">  </span><span class="o">].</span><span class="n">ring</span>
+
+<span class="w">  </span><span class="n">current_chord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chords</span><span class="o">.</span><span class="n">tick</span>
+
+<span class="w">  </span><span class="c1"># 算法化演奏：根-5-9-10 (跨越十度的宽广织体)</span>
+<span class="w">  </span><span class="c1"># 注意：这里我们手动挑选和弦内的音符索引</span>
+<span class="w">  </span><span class="c1"># 0=根音, 1=3音, 2=5音, 3=7音</span>
+
+<span class="w">  </span><span class="c1"># 模仿左手：根音 -&gt; 5音 -&gt; 7音 -&gt; 3音(高八度)</span>
+<span class="w">  </span><span class="c1"># 这种排列避开了低频的浑浊 3 音</span>
+<span class="w">  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">current_chord</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">current_chord</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">current_chord</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">current_chord</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">12</span><span class="o">]</span>
+
+<span class="w">  </span><span class="n">pattern</span><span class="o">.</span><span class="n">each</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">n</span><span class="o">|</span>
+<span class="w">    </span><span class="n">play</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">rrand</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="c1"># 力度人性化</span>
+<span class="w">    </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="b-hans-zimmer">B. 风格：Hans Zimmer / 史诗配乐</h3>
+<p><strong>织体关键词</strong>：<strong>Ostinato (固定音型) + 脉冲 + 滤波器动态</strong>
+Zimmer 的风格不在于复杂的旋律，而在于<strong>动态（Dynamics）</strong>和<strong>音色墙</strong>。核心是 16 分音符的短促重复，配合 Low Pass Filter (LPF) 的缓缓打开。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># --- 模板 B：Zimmer 式脉冲引擎 ---</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:zimmer_pulse</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># 使用 FM 合成器制造冷峻、金属感的音色，或者 :saw 制造弦乐感</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:fm</span>
+<span class="w">  </span><span class="n">use_synth_defaults</span><span class="w"> </span><span class="ss">depth</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">divisor</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span>
+
+<span class="w">  </span><span class="c1"># 和弦根音：d - a - b - g</span>
+<span class="w">  </span><span class="n">roots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="ss">:d2</span><span class="p">,</span><span class="w"> </span><span class="ss">:a1</span><span class="p">,</span><span class="w"> </span><span class="ss">:b1</span><span class="p">,</span><span class="w"> </span><span class="ss">:g1</span><span class="o">].</span><span class="n">ring</span>
+<span class="w">  </span><span class="n">current_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="ss">:chord</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># 滤波器自动化：模拟 Zimmer 音乐中那种“慢慢逼近”的压迫感</span>
+<span class="w">  </span><span class="c1"># range(60, 110, 0.5) 意味着 cutoff 从 60 慢慢升到 110</span>
+<span class="w">  </span><span class="n">cutoff_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">look</span><span class="p">(</span><span class="ss">:chord</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># 节奏型：16分音符推</span>
+<span class="w">  </span><span class="c1"># 4 * 4 = 16 个音符 (一小节)</span>
+<span class="w">  </span><span class="mi">16</span><span class="o">.</span><span class="n">times</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># 强弱重音设计：每4个音一个重音 (Ta-ka-ta-ka)</span>
+<span class="w">    </span><span class="n">accent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">look</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">4</span>
+
+<span class="w">    </span><span class="n">play</span><span class="w"> </span><span class="n">current_root</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="n">cutoff_val</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">accent</span>
+
+<span class="w">    </span><span class="c1"># 偶尔叠加一个五度音，增加厚度</span>
+<span class="w">    </span><span class="n">play</span><span class="w"> </span><span class="n">current_root</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="n">cutoff_val</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">accent</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">one_in</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="w">    </span><span class="n">tick</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="c">C. 风格：戏腔伴奏</h3>
+<p><strong>织体关键词</strong>：<strong>留白 (Sparse) + 重点装饰</strong>
+如果上方有戏腔人声，配器必须极度克制。不要写密集的音符，只在“句读”处点缀。</p>
+<ul>
+<li><strong>策略</strong>：<ol>
+<li><strong>Pad (铺底)</strong>：极低音量的长音，维持调性色彩。</li>
+<li><strong>Pluck (拨弦)</strong>：只在强拍或人声换气时出现。</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="46-bassline">4.6 低音线 (Bassline) 的决定性作用</h2>
+<p>低音决定了和弦的功能。在配乐中，控制低音比控制和弦更重要。</p>
+<ol>
+<li>
+<p><strong>Slash Chords (转位低音)</strong>：</p>
+<ul>
+<li>如果你上面弹 C 大调和弦，下面弹 E 音（C/E），听起来会比原位 C 更流动。</li>
+<li>Sonic Pi 写法：<code>play :e2</code> (Bass) + <code>play chord(:c4, :major)</code> (High)。</li>
+</ul>
+</li>
+<li>
+<p><strong>Pedal Point (持续音/踏板音)</strong>：</p>
+<ul>
+<li><strong>这是 Zimmer 的杀手锏</strong>。</li>
+<li><em>做法</em>：上方和弦一直在变（C -&gt; F -&gt; G -&gt; C），但低音一直保持 C (<code>:c2</code>) 不动。</li>
+<li><em>声学效果</em>：F/C 和 G/C 会产生巨大的<strong>张力（Tension）</strong>，因为低音与上方和弦打架。当最后回到 C/C 时，释放感是巨大的。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="47-gotchas">4.7 常见陷阱与错误 (Gotchas)</h2>
+<ol>
+<li>
+<p><strong>低频泥浆 (Muddy Mix)</strong>：</p>
+<ul>
+<li><em>现象</em>：声音听起来像“闷在被子里”，或者音箱发出“嗡嗡”声。</li>
+<li><em>原因</em>：在 <code>:c2</code> 或 <code>:c3</code> 的低音区演奏了密集的三和弦（如 <code>chord(:c2, :major)</code>）。低频区的临界频带（Critical Bandwidth）很宽，相邻的频率（如 C2 和 E2）会互相干扰产生粗糙的拍频。</li>
+<li><em>Rule of Thumb</em>：<strong>低音区只允许存在八度或五度</strong>。把三度音（决定大/小的音）放在 <code>:c3</code> 甚 <code>:c4</code> 以上。</li>
+</ul>
+</li>
+<li>
+<p><strong>默认音量过载 (Clipping)</strong>：</p>
+<ul>
+<li><em>现象</em>：爆音，红灯亮。</li>
+<li><em>原因</em>：<code>play chord(...)</code> 会同时触发 3-4 个合成器实例。Sonic Pi 默认 <code>amp: 1</code>，叠加后变成 3 或 4。</li>
+<li><em>修正</em>：播放和弦时，务必降低 <code>amp:</code>，例如 <code>amp: 0.4</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>甚至不像人弹的</strong>：</p>
+<ul>
+<li><em>现象</em>：机械感。</li>
+<li><em>修正</em>：<ul>
+<li><strong>Velocity (力度) 随机</strong>：<code>amp: rrand(0.5, 0.7)</code>。</li>
+<li><strong>Timing (时值) 微偏</strong>：不要完全对齐 <code>sleep</code>，虽然这在 Sonic Pi 里较难控制，但可以通过 <code>time_warp</code> 实现，或者简单地在 ADSR 的 <code>attack</code> 上加微小随机值 <code>attack: rrand(0, 0.05)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="48">4.8 本章小结</h2>
+<ol>
+<li><strong>选字典</strong>：<ul>
+<li>史诗 = I-V-vi-IV</li>
+<li>久石让 = IV-V-iii-vi (Major7/add9)</li>
+<li>古风 = vi-IV-I-V (sus2/无三度)</li>
+</ul>
+</li>
+<li><strong>做平滑</strong>：使用 <code>invert</code> 或手动八度调整，确保和声在中频区像蛇一样游动，而不是像青蛙一样跳跃。</li>
+<li><strong>定织体</strong>：<ul>
+<li>钢琴分解 = 叙事/温情。</li>
+<li>低音脉冲 + 滤波开合 = 紧张/动作/史诗。</li>
+<li>留白拨弦 = 戏腔/人声伴奏。</li>
+</ul>
+</li>
+<li><strong>理频段</strong>：低音只留根音/五音（骨头），和声色彩放在中高频（皮肉）。</li>
+</ol>
+<hr />
+<h2 id="49">4.9 练习题</h2>
+<h3 id="50">基础题 (50%)</h3>
+<p><strong>练习 1：和弦整形师</strong>
+写一个 <code>live_loop</code>，循环播放 <code>C - G - Am - F</code>。</p>
+<ul>
+<li><strong>现状</strong>：直接写 <code>play chord(:c4, :major)</code> 等会导致大跳。</li>
+<li><strong>任务</strong>：修改 <code>chord</code> 的八度或 <code>invert</code> 参数，使得所有音符的运动范围都保持在 <code>:c4</code> 到 <code>:c5</code> 之间（即最高音不超过 C5，最低音不低于 C4）。</li>
+<li><strong>提示</strong>：C (C-E-G) 到 G (G-B-D)，最近的连接是保留 G 音。G 和弦哪个转位是以 G 为最高音或中间音的？</li>
+</ul>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:smooth_chords</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:tri</span>
+<span class="w">  </span><span class="n">use_synth_defaults</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+
+<span class="w">  </span><span class="c1"># 这里的写法是为了追求声部平稳连接</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:c4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">)</span><span class="w">             </span><span class="c1"># C4, E4, G4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">  </span><span class="c1"># 目标：G Major (G, B, D)。</span>
+<span class="w">  </span><span class="c1"># 如果用 invert: 1 (B, D, G)，这样 G4 被保留在顶部，非常平滑</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:g3</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">,</span><span class="w"> </span><span class="ss">invert</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c1"># B3, D4, G4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">  </span><span class="c1"># 目标：Am (A, C, E)。</span>
+<span class="w">  </span><span class="c1"># 刚才在 B3, D4, G4。A minor 原位是 A3, C4, E4。</span>
+<span class="w">  </span><span class="c1"># invert: 1 是 C4, E4, A4。</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:a3</span><span class="p">,</span><span class="w"> </span><span class="ss">:minor</span><span class="p">,</span><span class="w"> </span><span class="ss">invert</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c1"># C4, E4, A4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">  </span><span class="c1"># 目标：F Major (F, A, C)。</span>
+<span class="w">  </span><span class="c1"># 刚才在 C4, E4, A4。F invert 2 是 C4, F4, A4。</span>
+<span class="w">  </span><span class="c1"># 两个音(C, A)都不用动！最完美的连接。</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="ss">:f4</span><span class="p">,</span><span class="w"> </span><span class="ss">:major</span><span class="p">,</span><span class="w"> </span><span class="ss">invert</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># C4, F4, A4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<p><strong>练习 2：一键古风化</strong>
+将一个普通的 C 大调和弦进行 <code>[:c, :a, :f, :g]</code> (I-vi-IV-V)，通过代码将其改为古风听感。</p>
+<ul>
+<li><strong>任务</strong>：不要使用 <code>:major</code> 或 <code>:minor</code>，全部替换为 <code>:sus2</code>。使用 <code>:pluck</code> 合成器。</li>
+<li><strong>观察</strong>：试着听一下，为什么在大调和小调位置都使用 sus2 却不违和？（答案：因为 sus2 模糊了调性界限）。</li>
+</ul>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:gufeng_vibe</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:pluck</span>
+<span class="w">  </span><span class="n">use_synth_defaults</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="ss">coef</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="w"> </span><span class="c1"># coef 控制拨弦的闷亮</span>
+
+<span class="w">  </span><span class="c1"># 根音环</span>
+<span class="w">  </span><span class="n">roots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="ss">:c3</span><span class="p">,</span><span class="w"> </span><span class="ss">:a2</span><span class="p">,</span><span class="w"> </span><span class="ss">:f2</span><span class="p">,</span><span class="w"> </span><span class="ss">:g2</span><span class="o">].</span><span class="n">ring</span>
+
+<span class="w">  </span><span class="c1"># 统一使用 sus2，消除三度音的冲突</span>
+<span class="w">  </span><span class="c1"># 这种伴奏非常适合叠加五声音阶的旋律</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="n">roots</span><span class="o">.</span><span class="n">tick</span><span class="p">,</span><span class="w"> </span><span class="ss">:sus2</span><span class="p">),</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h3 id="50_1">挑战题 (50%)</h3>
+<p><strong>练习 3：Hisaishi Arp (久石让式琶音模式)</strong>
+编写一个函数 <code>define :play_arpeggio do |root, type| ... end</code>。</p>
+<ul>
+<li><strong>场景</strong>：模拟《Summer》或《One Summer's Day》那种跳跃的左手。</li>
+<li><strong>要求</strong>：不仅是简单的上行。尝试模式：<strong>根音 -&gt; 5音 -&gt; 8音(高八度根音) -&gt; 5音</strong>。</li>
+<li><strong>应用</strong>：放入 live_loop 中演奏 IV-V-iii-vi。</li>
+</ul>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">define</span><span class="w"> </span><span class="ss">:play_arpeggio</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">|</span>
+<span class="w">  </span><span class="c1"># 获取和弦音：0=根, 1=3音, 2=5音, 3=7音(如果有)</span>
+<span class="w">  </span><span class="c1"># 注意：这里们假设传入的是三和弦，手动算八度</span>
+
+<span class="w">  </span><span class="c1"># 模式：根 -&gt; 5 -&gt; 8(根+12) -&gt; 5</span>
+<span class="w">  </span><span class="c1"># 这种 1-5-8 模式是钢琴伴奏中最稳固的结构</span>
+<span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chord</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
+<span class="w">  </span><span class="n">root_note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+<span class="w">  </span><span class="n">fifth_note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+
+<span class="w">  </span><span class="c1"># 手动构建旋律线</span>
+<span class="w">  </span><span class="n">melody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">root_note</span><span class="p">,</span><span class="w"> </span><span class="n">fifth_note</span><span class="p">,</span><span class="w"> </span><span class="n">root_note</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">fifth_note</span><span class="o">]</span>
+
+<span class="w">  </span><span class="n">melody</span><span class="o">.</span><span class="n">each</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">n</span><span class="o">|</span>
+<span class="w">    </span><span class="n">play</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">rrand</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="n">rrand</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:hisaishi_style</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:piano</span>
+<span class="w">  </span><span class="c1"># 典型的久石让走向</span>
+<span class="w">  </span><span class="n">play_arpeggio</span><span class="p">(</span><span class="ss">:f3</span><span class="p">,</span><span class="w"> </span><span class="ss">:major7</span><span class="p">)</span>
+<span class="w">  </span><span class="n">play_arpeggio</span><span class="p">(</span><span class="ss">:g3</span><span class="p">,</span><span class="w"> </span><span class="ss">:dom7</span><span class="p">)</span>
+<span class="w">  </span><span class="n">play_arpeggio</span><span class="p">(</span><span class="ss">:e3</span><span class="p">,</span><span class="w"> </span><span class="ss">:m7</span><span class="p">)</span>
+<span class="w">  </span><span class="n">play_arpeggio</span><span class="p">(</span><span class="ss">:a3</span><span class="p">,</span><span class="w"> </span><span class="ss">:m7</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<p><strong>练习 4：Zimmer 的时间膨胀 (思维拓展)</strong>
+Hans Zimmer 的配乐经常在一个和弦上停留很久（例如 4-8 小节），但音乐并不无聊，因为内部一直在动。</p>
+<ul>
+<li><strong>任务</strong>：<ul>
+<li>建立两个 <code>live_loop</code>。</li>
+<li><strong>Loop A (指挥官)</strong>：每 <code>sleep 8</code> 换一个和弦根音，使用 <code>set :root, ...</code> 广播。</li>
+<li><strong>Loop B (士兵)</strong>：执行 16 分音符的快速脉冲。使用 <code>get[:root]</code> 读取当前根音。</li>
+<li><strong>关键点</strong>：在 Loop B 中加入 <code>cutoff</code> 的随机化或周期性变化，让这 8 秒钟内的音色不断变亮再变暗。</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>点击查看提示 (Hint)</summary>
+<p><br>
+利用 <code>vt</code> (virtual time) 或者 <code>tick</code> 来控制 cutoff 的曲线。例如 <code>cutoff: range(70, 110, 0.2).look</code> 可以让滤波器慢慢打开。</p>
+</details>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter3.html" class="nav-link prev">← 第 3 章：时间、同步与 Live Coding 思维</a><a href="chapter5.html" class="nav-link next">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段” →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

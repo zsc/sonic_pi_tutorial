@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 1 章：Sonic Pi 快速上手——从 8 小节开始</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：Sonic Pi 快速上手——从 8 小节开始</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：从五线谱到代码——音高、时值与读谱映射</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：时间、同步与 Live Coding 思维</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：和弦进行到可听配器——“会和弦”到“像作品”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：旋律写作与动机发展——从“能哼”到“能撑住一段”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：节奏织体与打击乐——从板鼓到 Zimmer Drums</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 7 章：合成器与音色——用频谱直觉在 Sonic Pi 里调音</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：采样、切片与粒子化——把“真实”变成“可写作素材”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：效果器链与混音入门——让作品“站起来”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：电影配乐的配器思路——久石让与 Hans Zimmer 的“可落地抽象”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：华语古风与戏腔专题——“腔、韵、留白、材质”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：结构与叙事——把段落写成“情绪弧线”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="1-sonic-pi-8">第 1 章：Sonic Pi 快速上手——从 8 小节开始</h1>
+<h2 id="11">1.1 开篇：代码作为乐器</h2>
+<p>欢迎来到 Sonic Pi 的世界。作为一个能识谱、懂和弦走向，并对频谱有直觉的创作者，你可能会问：<strong>为什么要放弃直观的钢琴卷帘窗（Piano Roll），转而使用代码？</strong></p>
+<p>在 DAW 中，你是在<strong>描绘</strong>波形；而在 Sonic Pi 中，你是在<strong>描述</strong>产生波形的逻辑。对于我们设定的目标风格，这种思维转换带来了巨大的优势：</p>
+<ol>
+<li><strong>Hans Zimmer 式的“墙” (Wall of Sound)</strong>：Zimmer 的配乐常由数十层精准同步的 16 分音符脉冲构成（如 <em>The Dark Knight</em>）。在 DAW 中，稍微量化误差或复制粘贴错误会导致“相位抵消”或律动松散。而在代码中，<code>sleep 0.25</code> 是数学上的绝对精确，能产生极具压迫感的“机械整齐度”。</li>
+<li><strong>久石让式的“有机织体”</strong>：久石让的极简主义风格（Minimalism）常包含不断重复但逐渐演变的分解和弦。用代码写一个“每次重复时有 20% 概率把根音提高八度”的函数，比手画 100 个小节的 MIDI 还要生动且高效。</li>
+<li><strong>古风/戏腔的“气韵”</strong>：戏腔讲究“非网格化”的拖腔。通过代码控制微小的随机时间偏移（Randomization），我们可以模拟出人类演奏时的“呼吸感”，而不是死板的机器节奏。</li>
+</ol>
+<p>本章的目标是让你建立<strong>“时间=代码行”</strong>的直觉，并写出第一个包含鼓、贝斯、和声的 8 小节循环。</p>
+<hr />
+<h2 id="12">1.2 安装与音频设置：物理与数字的桥梁</h2>
+<p>Sonic Pi 的底层是一个强大的音频合成引擎（SuperCollider）。作为熟悉频谱分析的，需要理解这里的<strong>采样率</strong>与<strong>缓冲</strong>设置，因为它们直接关系到声音的<strong>瞬态响应（Transient Response）</strong>。</p>
+<h3 id="121-sample-rate">1.2.1 采样率 (Sample Rate)</h3>
+<ul>
+<li><strong>建议</strong>：保持与你的系统或外置声卡一致，通常为 <strong>44.1kHz</strong> 或 <strong>48kHz</strong>。</li>
+<li><strong>坑</strong>：如果 Sonic Pi 的采样率与声卡不匹配，系统会进行实时重采样（Resampling），这会引入<strong>混叠失真（Aliasing）</strong>，导致高频部分变得“脏”且有金属味，破坏古风音乐需要的“清透感”。</li>
+</ul>
+<h3 id="122-buffer-size">1.2.2 缓冲区大小 (Buffer Size) 与延迟</h3>
+<p>这里谈论的是音频硬件的 Buffer，不是代码界面的 Buffer。</p>
+<ul>
+<li><strong>原理</strong>：Buffer 是一个蓄水池。CPU 计算出的音频数据先存入池中，填满后再一次性送往声卡。</li>
+<li><strong>听觉影响</strong>：<ul>
+<li><strong>Buffer 过小 (e.g., 64/128 samples)</strong>：CPU 来不及填满水池，声卡就来取数据，导致“空缺”。这在听感上就是<strong>爆音 (Crackles/Xruns)</strong>，频谱上表现为全频段的宽带声脉冲。</li>
+<li><strong>Buffer 过大 (e.g., 1024/2048 samples)</strong>：水池很大，CPU 很从容，声音很纯净。但延迟（Latency）会增加。</li>
+</ul>
+</li>
+<li><strong>Rule-of-Thumb (经验法则)</strong>：<ul>
+<li><strong>创作阶段</strong>：设为 <code>512</code> 或 <code>1024</code>。我们是在“写作”，不是在“手指击鼓”，100ms 的延迟完全不影响代码生效，且能保证你在叠加几十层 Zimmer 式大动态管弦乐时不会爆音。</li>
+<li><strong>现场 Live Coding</strong>：设为 <code>256</code>。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="13">1.3 界面与运行模型：这不是播放器</h2>
+<p>Sonic Pi 的操作逻辑不是“播放录音带”，而是<strong>“实时解释执行”</strong>。</p>
+<h3 id="131">1.3.1 核心按钮</h3>
+<ol>
+<li><strong>Run (运行)</strong>：发送当前代码给合成引擎。<ul>
+<li><em>注意</em>：如果你在一个 <code>live_loop</code> 已经在跑的时候再次点击 Run，Sonic Pi 会<strong>动态更新</strong>那个循环的逻辑，而不会停止它。这就是 Live Coding 的核心。</li>
+</ul>
+</li>
+<li><strong>Stop (停止)</strong>：类似于“紧急切断”。它会立即停止所有正在发声的合成器节点。</li>
+<li><strong>Rec (录音)</strong>：将总线输出录制为 WAV 文件。</li>
+</ol>
+<h3 id="132-scope">1.3.2 示波器 (Scope)</h3>
+<p>界面右上角的 Scope 显示了输出信号的波形。</p>
+<ul>
+<li><strong>用途</strong>：当你使用立体声声像（Pan）或复杂的相位调制（Phasing）效果时，观察 Scope 的李萨如图形（Lissajous）可以帮你判断<strong>相位兼容性</strong>。如果图形是一条垂直线，说明是单声道；如果是一团乱麻，说明立体声宽度很大。</li>
+</ul>
+<h3 id="133-logs">1.3.3 日志 (Logs)</h3>
+<p>右侧面板。它会显示：</p>
+<ul>
+<li><code>{run: 1, time: 0.0}</code>：当前运行的 ID 和节拍时间。</li>
+<li><code>synth :prophet, {note: 60, ...}</code>：具体触发了什么音。</li>
+<li><strong>调试技巧</strong>：如果声音不响但 Log 在滚动，说明代码逻辑是对的，问题出在音频路由或合成器参数（如 <code>amp: 0</code>）。</li>
+</ul>
+<hr />
+<h2 id="14">1.4 代码最小语法：从乐理到字符</h2>
+<p>我们需要将五线谱上的概念精准翻译成 Ruby 语法。</p>
+<h3 id="141-pitch">1.4.1 音高 (Pitch)：频率的抽象</h3>
+<p>Sonic Pi 接受三种音高表示法，它们可以混用：</p>
+<ol>
+<li><strong>音名符号</strong>：<code>:c4</code> (中央C), <code>:fs3</code> (F#3), <code>:eb5</code> (Eb5)。这是最直观的。</li>
+<li><strong>MIDI 编号</strong>：<code>60</code> (中央C)。适合数学运算（例如：<code>60 + 12</code> 升八度）。</li>
+<li><strong>赫兹 (Hz)</strong>：可以直接输入频率 <code>440</code>。这对于做<strong>微分音（Microtonal）</strong>或模拟古琴不标准的定弦非常有用。</li>
+</ol>
+<h3 id="142-durationsleep">1.4.2 时值 (Duration)：<code>sleep</code> 的哲学</h3>
+<p>在 Sonic Pi 中，<strong>时间是阻塞的</strong>。程序读到 <code>sleep 1</code> 会真的“睡” 1 拍，然后再执行下一行。</p>
+<p>$$ \text{实际秒数} = \frac{60}{\text{BPM}} \times \text{sleep数值} $$</p>
+<p>| 五线谱 | 代码 (默认 BPM) | 说明 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">五线谱</th>
+<th style="text-align: left;">代码 (默认 BPM)</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>四分音符</strong> (Quarter)</td>
+<td style="text-align: left;"><code>sleep 1</code></td>
+<td style="text-align: left;">一拍</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>八分音符</strong> (Eighth)</td>
+<td style="text-align: left;"><code>sleep 0.5</code></td>
+<td style="text-align: left;">半拍</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>十六分音符</strong> (16th)</td>
+<td style="text-align: left;"><code>sleep 0.25</code></td>
+<td style="text-align: left;">Zimmer 动作类配乐的基础网格</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>三连音</strong> (Triplet)</td>
+<td style="text-align: left;"><code>sleep 1.0/3</code></td>
+<td style="text-align: left;">注意要写 <code>1.0</code> 这种浮点数，写 <code>1/3</code> 会变成 0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="143-do-end">1.4.3 容器：<code>do ... end</code> 块</h3>
+<p>在 Sonic Pi 中，几乎所有的结构（循环、函数、随机选择）都包裹在 <code>do ... end</code> 之间。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 这是一个代码块的示例</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:my_loop</span><span class="w"> </span><span class="k">do</span><span class="w">  </span><span class="c1"># 开始</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span><span class="w">                    </span><span class="c1"># 结束</span>
+</code></pre></div>
+
+<hr />
+<h2 id="15-8">1.5 第一个 8 小节：构建“电影感”织体</h2>
+<p>我们将直接跳过单调的“滴滴嘟嘟”，构建一个包含 <strong>Zimmer 式低频脉冲</strong>、<strong>久石让式清澈和弦</strong> 和 <strong>古风旋律动机</strong> 的 8 小节片段。</p>
+<p>请将以下代码复制到 Buffer 0 中：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 全局设定：速度设为 80 BPM，适合史诗感或舒缓的古风</span>
+<span class="n">use_bpm</span><span class="w"> </span><span class="mi">80</span>
+
+<span class="c1"># === 层级 1: 节奏与脉冲 (Rhythm &amp; Pulse) ===</span>
+<span class="c1"># 模拟 Hans Zimmer 的 Action Strings 或合成器 Bass 脉冲</span>
+<span class="c1"># 这种 16 分音符的持续驱动是现代配乐的骨架</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:pulse</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># 选用一个模拟合成器贝斯音色</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:tb303</span>
+
+<span class="w">  </span><span class="c1"># tick 命令：每次循环让计数器 +1</span>
+<span class="w">  </span><span class="c1"># look 命令：查看当前计数器的值</span>
+<span class="w">  </span><span class="c1"># 这是一个简单的逻辑：每 4 个音符(一拍)，第一个音大声(0.3)，后个小声(0.15)</span>
+<span class="w">  </span><span class="c1"># 这种强弱规律创造了“推进感”</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">look</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">amp_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="n">amp_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">15</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="c1"># cutoff: 滤波器截止频率。设低一点(70)让声音闷在下面，不抢高频旋律</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:c2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">cutoff</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">amp_val</span>
+
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="w"> </span><span class="c1"># 16分音符网格</span>
+<span class="w">  </span><span class="n">tick</span><span class="w">       </span><span class="c1"># 计数器推进</span>
+<span class="k">end</span>
+
+<span class="c1"># === 层级 2: 氛围和声 (Atmospheric Chords) ===</span>
+<span class="c1"># 模拟久石让风格的铺底，使用长音 Pad</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:chords</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># :hollow 是一种带有风声特性的合成器，非常适合古风留白</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:hollow</span>
+
+<span class="w">  </span><span class="c1"># 定义和弦进行：C大调 I - V - vi - IV (C - G - Am - F)</span>
+<span class="w">  </span><span class="c1"># 这里的 ring 是环形列表，tick 会自动循环读取</span>
+<span class="w">  </span><span class="n">current_chord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ring</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span><span class="ss">:c3</span><span class="p">,</span><span class="w"> </span><span class="ss">:e3</span><span class="p">,</span><span class="w"> </span><span class="ss">:g3</span><span class="p">,</span><span class="w"> </span><span class="ss">:b3</span><span class="o">]</span><span class="p">,</span><span class="w">  </span><span class="c1"># Cmaj7</span>
+<span class="w">    </span><span class="o">[</span><span class="ss">:g2</span><span class="p">,</span><span class="w"> </span><span class="ss">:d3</span><span class="p">,</span><span class="w"> </span><span class="ss">:g3</span><span class="p">,</span><span class="w"> </span><span class="ss">:b3</span><span class="o">]</span><span class="p">,</span><span class="w">  </span><span class="c1"># G/B (转位)</span>
+<span class="w">    </span><span class="o">[</span><span class="ss">:a2</span><span class="p">,</span><span class="w"> </span><span class="ss">:c3</span><span class="p">,</span><span class="w"> </span><span class="ss">:e3</span><span class="p">,</span><span class="w"> </span><span class="ss">:g3</span><span class="o">]</span><span class="p">,</span><span class="w">  </span><span class="c1"># Am7</span>
+<span class="w">    </span><span class="o">[</span><span class="ss">:f2</span><span class="p">,</span><span class="w"> </span><span class="ss">:c3</span><span class="p">,</span><span class="w"> </span><span class="ss">:e3</span><span class="p">,</span><span class="w"> </span><span class="ss">:a3</span><span class="o">]</span><span class="w">   </span><span class="c1"># Fmaj7</span>
+<span class="w">  </span><span class="p">)</span><span class="o">.</span><span class="n">tick</span>
+
+<span class="w">  </span><span class="c1"># attack: 起音时间。4秒的缓慢淡入，制造像云雾一样的感觉</span>
+<span class="w">  </span><span class="c1"># sustain: 保持时间。</span>
+<span class="w">  </span><span class="c1"># release: 释放时间。</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="n">current_chord</span><span class="p">,</span><span class="w"> </span><span class="ss">attack</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="ss">sustain</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">release</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="mi">2</span>
+
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="c1"># 每个和弦持续 2 小节 (8拍)</span>
+<span class="k">end</span>
+
+<span class="c1"># === 层级 3: 旋律 (Melody) ===</span>
+<span class="c1"># 简单的五声音阶动机，模拟钢琴或钟琴</span>
+<span class="n">live_loop</span><span class="w"> </span><span class="ss">:melody</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:piano</span>
+
+<span class="w">  </span><span class="c1"># sync 极其重要！它强制让旋律层等待 :pulse 层完成一轮</span>
+<span class="w">  </span><span class="c1"># 这保证了无论你何时点击 Run，鼓和旋律永远对齐，不会乱拍</span>
+<span class="w">  </span><span class="n">sync</span><span class="w"> </span><span class="ss">:pulse</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1"># 五声音阶：C D E G A</span>
+<span class="w">  </span><span class="n">play_pattern_timed</span><span class="w"> </span><span class="o">[</span><span class="ss">:c5</span><span class="p">,</span><span class="w"> </span><span class="ss">:d5</span><span class="p">,</span><span class="w"> </span><span class="ss">:e5</span><span class="p">,</span><span class="w"> </span><span class="ss">:g5</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span>
+
+<span class="w">  </span><span class="n">play_pattern_timed</span><span class="w"> </span><span class="o">[</span><span class="ss">:a5</span><span class="p">,</span><span class="w"> </span><span class="ss">:g5</span><span class="p">,</span><span class="w"> </span><span class="ss">:e5</span><span class="p">,</span><span class="w"> </span><span class="ss">:d5</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="_1">代码解析与声学直觉</h3>
+<ol>
+<li><strong>滤波器 (<code>cutoff: 70</code>)</strong>：在 <code>:pulse</code> 层，我们使用了低通滤波器。作为懂频谱的你，知道这能把 1000Hz 以上的空间留给 <code>:melody</code> 层，避免低频乐器和高频旋律“打架”。这就在代码里完成了初步的<strong>混音（Mixing）</strong>。</li>
+<li><strong>包络 (<code>attack: 4</code>)</strong>：在 <code>:chords</code> 层，长 Attack 意味着声音慢慢浮现，这是营“电影感”和“古风意境”的关键——不要让所有声音都瞬间冲出来。</li>
+<li><strong>同步 (<code>sync</code>)</strong>：这是 Sonic Pi 最强大的功能。它解决了传统编程很难处理的“对齐”问题。</li>
+</ol>
+<hr />
+<h2 id="16-stems">1.6 如何“录下来”：内录与分轨 (Stems)</h2>
+<p>如果你只是点击顶部的 <code>Rec</code>，你会得到一个混合好的 WAV。但这不够专业。为了配合人声处理，我们需要<strong>分轨导出 (Stems)</strong>。</p>
+<h3 id="161">1.6.1 为什么要分轨？</h3>
+<p>人声（Vocal）通常占据中频（500Hz - 2kHz）。如果你把伴奏录成了一轨，当人声切入时，你无法单独把伴奏里的钢琴中频挖掉，也无法只给鼓组加侧链压缩（Sidechain Compression）。</p>
+<h3 id="162-sonic-pi">1.6.2 Sonic Pi 的分轨流程</h3>
+<p>没有“一键导出所有分轨”的功能，我们通常这样做：</p>
+<ol>
+<li><strong>独奏 (Solo) 鼓组</strong>：<ul>
+<li>在 <code>:chords</code> 和 <code>:melody</code> 的 <code>live_loop</code> 前面加上 <code>stop</code> 命令，或者注释掉它们。</li>
+<li>点击 <code>Run</code>，现在只听到鼓。</li>
+<li>点击 <code>Rec</code>，录制 8-16 小节。保存为 <code>Drums.wav</code>。</li>
+</ul>
+</li>
+<li><strong>独奏和声</strong>：<ul>
+<li>恢复 <code>:chords</code>，注释掉其他。</li>
+<li>点击 <code>Rec</code>。保存为 <code>Pad.wav</code>。</li>
+</ul>
+</li>
+<li><strong>独奏旋律</strong>：<ul>
+<li>同理。保存为 <code>Melody.wav</code>。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>💡 经验法则 - 头部静音</strong></p>
+<p>录音时，<strong>先点 Rec，再点 Run</strong>。让音频文件开头有一段空白。
+拖入 DAW (Logic/Cubase) 后，你只需要把所有波形的<strong>第一个声音瞬态（Transient）</strong> 对齐到网格的第 2 小节或第 3 小节开头，所有轨道就会完美同步。</p>
+</blockquote>
+<hr />
+<h2 id="17">1.7 本书约定</h2>
+<p>为了后续章节的学习，我们约定以下代码规范：</p>
+<ul>
+<li><strong>命名</strong>：<code>live_loop</code> 的名字要有意义，如 <code>:drums_kick</code>、<code>:piano_arp</code>。</li>
+<li><strong>版本管理</strong>：如果你想试一个新的旋律，不要删掉旧的。复制那个 loop，把旧的改名为 <code>:melody_v1</code> 并注释掉，新的叫 <code>:melody_v2</code>。</li>
+<li><strong>注释</strong>：用 <code>#</code> 写下你的乐理意图。例如 <code># 这里的 sleep 是为了让出人声的空间</code>。</li>
+</ul>
+<hr />
+<h2 id="18">1.8 练习题</h2>
+<h3 id="50">基础题 (50%)</h3>
+<p><strong>练习 1：音高听写与修正</strong>
+下面的代码试图播放 C 大调音阶（C D E F G A B C），但听起来很怪。请找出错误的音符并修正它。</p>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:scale_test</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:c4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:d4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:e4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:fs4</span><span class="w">  </span><span class="c1"># &lt;--- 听听这里是不是怪怪的？</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:g4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:a4</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:bb4</span><span class="w"> </span><span class="c1"># &lt;--- 这里呢？</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">play</span><span class="w"> </span><span class="ss">:c5</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<details>
+<summary>点击查看提示</summary>
+<p>C 大调没有升降号。<code>fs</code> 是 F Sharp (#F)，<code>bb</code> 是 B Flat (bG)。你需要把它们改成自然音。</p>
+</details>
+<details>
+<summary>点击查看参考答案</summary>
+<p>将 <code>:fs4</code> 改为 <code>:f4</code>，将 <code>:bb4</code> 改为 <code>:b4</code>。</p>
+</details>
+<p><strong>练习 2：呼吸节奏</strong>
+使用 <code>sample :bd_tek</code> 写一个心跳节奏。要求：</p>
+<ul>
+<li>不是机械的 <code>sleep 1</code>。</li>
+<li>而是“咚(0.5s) -&gt; 咚(1s) -&gt; 咚(0.5s) -&gt; 咚(1s)”的循环。</li>
+</ul>
+<details>
+<summary>点击查看提示</summary>
+<p>你需要两个 sample 命令和两个 sleep 命令交替。</p>
+</details>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:heartbeat</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">sample</span><span class="w"> </span><span class="ss">:bd_tek</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="n">sample</span><span class="w"> </span><span class="ss">:bd_tek</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<p><strong>练习 3：和弦的声音设计</strong>
+复制 1.5 节中的 <code>:chords</code> 循环。尝试修改 <code>attack</code> 和 <code>release</code> 参数。</p>
+<ul>
+<li>任务：让声音变成短促的“拨弦感”，而不是长音 Pad。</li>
+</ul>
+<details>
+<summary>点击查看提示</summary>
+<p>拨弦乐器（如吉他、竖琴）的特性是：Attack 极短（接近 0），Release 较短（1 左右）。同时尝试把 synth 改为 <code>:pluck</code>。</p>
+</details>
+<hr />
+<h3 id="50_1">挑战题 (50%)</h3>
+<p><strong>练习 4：Hans Zimmer 的 5/4 拍推进</strong>
+Zimmer 喜欢用非 4/4 拍的奇数拍子制造不稳定感。
+请写一个 Loop：</p>
+<ul>
+<li>每小节 5 拍。</li>
+<li>节奏型是：<strong>3 + 2</strong> (即 <code>强 弱 弱 | 强 弱</code>)。</li>
+<li>使用 <code>:drum_heavy_kick</code>。</li>
+<li><strong>关键</strong>：强拍 <code>amp: 1</code>，弱拍 <code>amp: 0.5</code>。</li>
+</ul>
+<details>
+<summary>点击查看提示</summary>
+<p>这需要 5 个 <code>sample</code> 命令。前 3 个一组，后 2 个一组。第 1 个和第 4 个是强拍。
+或者，使用 <code>ring</code> 和 <code>tick</code> 来控制 amp 值。</p>
+</details>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:cinematic_5_4</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># 定义 5 拍的重音模式: 1=强, 0.5=弱</span>
+<span class="w">  </span><span class="c1"># 模式: 强 弱 弱 强 弱 (3+2 结构)</span>
+<span class="w">  </span><span class="n">amp_pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ring</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="w">  </span><span class="n">sample</span><span class="w"> </span><span class="ss">:drum_heavy_kick</span><span class="p">,</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="n">amp_pattern</span><span class="o">.</span><span class="n">tick</span>
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1"># 每拍一下</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<p><strong>练习 5：古风的“留白”概率</strong>
+写一个风铃或古筝的高音 Loop。</p>
+<ul>
+<li>要求：每 0.25 拍执行一次代码，但<strong>只有 20% 的概率</strong>真正发出声音。</li>
+<li>提示：使用 <code>one_in(5)</code> 函数。如果是 true 则 play，否则不 play。</li>
+</ul>
+<details>
+<summary>点击查看提示</summary>
+<p><code>if one_in(5)</code> ... <code>play ...</code> <code>end</code>。这是生成稀疏织体的核心技巧。</p>
+</details>
+<details>
+<summary>点击查看参考答案</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">live_loop</span><span class="w"> </span><span class="ss">:guzheng_random</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">use_synth</span><span class="w"> </span><span class="ss">:pluck</span>
+
+<span class="w">  </span><span class="c1"># 每次都有 1/5 的概率响，制造稀疏感</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">one_in</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># 在五声音阶中随机选一个高音</span>
+<span class="w">    </span><span class="n">play</span><span class="w"> </span><span class="p">(</span><span class="n">choose</span><span class="w"> </span><span class="o">[</span><span class="ss">:c6</span><span class="p">,</span><span class="w"> </span><span class="ss">:d6</span><span class="p">,</span><span class="w"> </span><span class="ss">:e6</span><span class="p">,</span><span class="w"> </span><span class="ss">:g6</span><span class="p">,</span><span class="w"> </span><span class="ss">:a6</span><span class="o">]</span><span class="p">),</span><span class="w"> </span><span class="ss">amp</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="nb">sleep</span><span class="w"> </span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="k">end</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h2 id="19-gotchas">1.9 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1live_loop">陷阱 1：<code>live_loop</code> 命名冲突</h3>
+<p><strong>错误</strong>：复制了两个 <code>live_loop</code> 但忘记改名，两个都叫 <code>:beat</code>。
+<strong>后果</strong>：Sonic Pi 会认为你是在修改同一个 Loop。只有最后一个被定义的 <code>:beat</code> 会运行，前一个会消失或被覆盖。
+<strong>调试</strong>：确保每个 <code>live_loop</code> 的名字（冒号后面的部分）在整个文件中是唯一的。</p>
+<h3 id="2">陷阱 2：休止符的误解</h3>
+<p><strong>错误</strong>：想写一个休止符，于是写了 <code>play 0</code> 或 <code>amp: 0</code>。
+<strong>解释</strong>：虽然听不到声音，但这实际上还是消耗了 CPU 去合成一个静音。
+<strong>正确做法</strong>：直接 <code>sleep</code> 即可。<code>sleep</code> 本身就是“不发声的时间流逝”，也就是休止符。</p>
+<h3 id="3">陷阱 3：中文标点</h3>
+<p>这是新手最容易遇到的 Syntax Error。</p>
+<ul>
+<li>❌ <code>play :c4， amp: 1</code> (中文逗号)</li>
+<li>✅ <code>play :c4, amp: 1</code> (英文逗号)</li>
+<li>Sonic Pi 编辑器对于无法识别的字符通常不会变色（保持黑色或灰色），而合法的代码会有颜色（粉色、蓝色等）。<strong>看颜色</strong>是快速排错的方法。</li>
+</ul>
+            </article>
+            
+            <nav class="page-nav"><a href="index.html" class="nav-link prev">← Sonic Pi 作曲与音色设计：古风/戏腔 × 久石让 / Hans Zimmer 式配乐 × 人声处理（中文）</a><a href="chapter2.html" class="nav-link next">第 2 章：从五线谱到代码——音高、时值与读谱映射 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>
